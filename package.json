@@ -1,0 +1,30 @@
+{
+  "name": "@wowserhq/formats",
+  "version": "0.0.1",
+  "description": "Parsers for common file formats used by Wowser",
+  "author": "Wowser Contributors",
+  "repository": "wowserhq/client",
+  "license": "MIT",
+  "files": [
+    "AUTHORS",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node --experimental-modules scripts/build.mjs",
+    "test": "node --experimental-modules scripts/test.mjs"
+  },
+  "keywords": [
+    "world of warcraft",
+    "warcraft",
+    "blizzard",
+    "wow"
+  ],
+  "dependencies": {
+    "js-yaml": "3.14.0",
+    "kaitai-struct-compiler": "0.9.0-SNAPSHOT20200523.214733.bc36f123"
+  },
+  "devDependencies": {
+    "kaitai-struct": "0.9.0-SNAPSHOT.1"
+  }
+}
