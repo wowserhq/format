@@ -1,0 +1,54 @@
+{
+  "name": "@wowserhq/format",
+  "version": "0.1.0",
+  "description": "Format classes to work with common data files used in World of Warcraft",
+  "author": "Wowser Contributors",
+  "repository": "github:wowserhq/format",
+  "license": "MIT",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/esm/index.js"
+  },
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run test && npm run build:cjs && npm run build:esm && npm run build:types && npm run build:package",
+    "build:cjs": "tsc --module commonjs --outDir ./dist/cjs",
+    "build:esm": "tsc --module node16 --outDir ./dist/esm",
+    "build:types": "tsc --module node16 --emitDeclarationOnly --declaration --declarationDir ./dist/types",
+    "build:package": "node ./script/build-package.js",
+    "clean": "node ./script/clean.js",
+    "format": "prettier ./src/**/* --write",
+    "lint": "eslint --ignore-path .gitignore",
+    "lint:commit": "commitlint --edit",
+    "prepublishOnly": "npm run build",
+    "test": "npm run lint && vitest run",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "wowser"
+  ],
+  "dependencies": {
+    "@wowserhq/io": "^1.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^18.4.3",
+    "@types/node": "^20.9.3",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "@vitest/ui": "^0.34.6",
+    "commitlint": "^18.4.3",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "fs-extra": "^11.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2",
+    "vitest": "^0.34.6"
+  }
+}
