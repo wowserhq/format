@@ -1,0 +1,10 @@
+{
+  "include": ["./src/lib/**/*"],
+  "compilerOptions": {
+    "target": "es2022",
+    "allowJs": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node16"
+  }
+}
