@@ -28,6 +28,12 @@ jobs:
         env:
           CI: true
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        if: matrix.node-version == '18.x'
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   build:
     runs-on: ubuntu-latest
 
