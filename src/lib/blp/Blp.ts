@@ -25,7 +25,7 @@ class Blp {
 
   load(source: IoSource) {
     const stream = openStream(source);
-    const header = blpIo.header.read(stream, {});
+    const header = blpIo.header.read(stream);
 
     if (header.magic !== BLP_MAGIC) {
       stream.close();
