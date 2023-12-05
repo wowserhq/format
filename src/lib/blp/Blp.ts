@@ -1,12 +1,13 @@
 import { IoSource, openStream } from '@wowserhq/io';
 import {
-  BLP_MAGIC,
   BLP_COLOR_FORMAT,
   BLP_IMAGE_FORMAT,
-  MAX_MIPS,
+  BLP_MAGIC,
   BLP_PIXEL_FORMAT,
+  MAX_MIPS,
 } from './const.js';
 import { dxt1ToRgba8888, dxt3ToRgba8888, dxt5ToRgba8888 } from './dxt.js';
+import { palToRgba8888 } from './pal.js';
 import * as blpIo from './io.js';
 import { getSizeAtMipLevel } from './util.js';
 import BlpImage from './BlpImage.js';
@@ -246,8 +247,21 @@ class Blp {
   }
 
   #getPalImage(level: number, outputFormat: BLP_IMAGE_FORMAT): BlpImage {
-    // TODO
-    throw new Error('Unimplemented');
+    const width = getSizeAtMipLevel(this.#width, level);
+    const height = getSizeAtMipLevel(this.#height, level);
+    const data = this.#images[level];
+
+    switch (outputFormat) {
+      case BLP_IMAGE_FORMAT.IMAGE_RGBA8888:
+        return new BlpImage(
+          width,
+          height,
+          palToRgba8888(width, height, data, this.#palette, this.#alphaSize),
+          outputFormat,
+        );
+      default:
+        throw new Error(`Unsupported output format: ${outputFormat}`);
+    }
   }
 
   #reset() {
