@@ -37,10 +37,10 @@ const dxt1GenerateColorLookup = (color0: number, color1: number) => {
   COLOR_LOOKUP[2] = b0;
   COLOR_LOOKUP[3] = 255;
 
-  COLOR_LOOKUP[ 4] = r1;
-  COLOR_LOOKUP[ 5] = g1;
-  COLOR_LOOKUP[ 6] = b1;
-  COLOR_LOOKUP[ 7] = 255;
+  COLOR_LOOKUP[4] = r1;
+  COLOR_LOOKUP[5] = g1;
+  COLOR_LOOKUP[6] = b1;
+  COLOR_LOOKUP[7] = 255;
 
   if (color0 > color1) {
     COLOR_LOOKUP[ 8] = ((2 * r0 + 1 * r1) / 3) | 0;
