@@ -143,7 +143,7 @@ const dxt5DecompressBlock = (block: Uint8Array) => {
   DECOMPRESSED[35] = ALPHA_LOOKUP[ (block[5] & 0b00000111) >> 0];
 };
 
-const dxtToRgba8888 = (
+const dxtToAbgr8888 = (
   width: number,
   height: number,
   input: Uint8Array,
@@ -195,13 +195,13 @@ const dxtToRgba8888 = (
   return output;
 };
 
-const dxt1ToRgba8888 = (width: number, height: number, input: Uint8Array) =>
-  dxtToRgba8888(width, height, input, DXT1_BLOCK_SIZE, dxt1DecompressBlock);
+const dxt1ToAbgr8888 = (width: number, height: number, input: Uint8Array) =>
+  dxtToAbgr8888(width, height, input, DXT1_BLOCK_SIZE, dxt1DecompressBlock);
 
-const dxt3ToRgba8888 = (width: number, height: number, input: Uint8Array) =>
-  dxtToRgba8888(width, height, input, DXT3_BLOCK_SIZE, dxt3DecompressBlock);
+const dxt3ToAbgr8888 = (width: number, height: number, input: Uint8Array) =>
+  dxtToAbgr8888(width, height, input, DXT3_BLOCK_SIZE, dxt3DecompressBlock);
 
-const dxt5ToRgba8888 = (width: number, height: number, input: Uint8Array) =>
-  dxtToRgba8888(width, height, input, DXT5_BLOCK_SIZE, dxt5DecompressBlock);
+const dxt5ToAbgr8888 = (width: number, height: number, input: Uint8Array) =>
+  dxtToAbgr8888(width, height, input, DXT5_BLOCK_SIZE, dxt5DecompressBlock);
 
-export { dxt1ToRgba8888, dxt3ToRgba8888, dxt5ToRgba8888 };
+export { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 };

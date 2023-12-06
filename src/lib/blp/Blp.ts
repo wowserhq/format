@@ -6,8 +6,8 @@ import {
   BLP_PIXEL_FORMAT,
   MAX_MIPS,
 } from './const.js';
-import { dxt1ToRgba8888, dxt3ToRgba8888, dxt5ToRgba8888 } from './dxt.js';
-import { palToRgba8888 } from './pal.js';
+import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
+import { palToAbgr8888 } from './pal.js';
 import * as blpIo from './io.js';
 import { getSizeAtMipLevel } from './util.js';
 import BlpImage from './BlpImage.js';
@@ -152,7 +152,7 @@ class Blp {
     switch (this.#colorFormat) {
       case BLP_COLOR_FORMAT.COLOR_PAL:
         // Images using palettes are only useful when decoded
-        return this.#getPalImage(level, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        return this.#getPalImage(level, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
       case BLP_COLOR_FORMAT.COLOR_DXT:
         switch (this.#preferredFormat) {
@@ -204,8 +204,8 @@ class Blp {
       case BLP_IMAGE_FORMAT.IMAGE_DXT1:
         return new BlpImage(width, height, data, outputFormat);
 
-      case BLP_IMAGE_FORMAT.IMAGE_RGBA8888:
-        return new BlpImage(width, height, dxt1ToRgba8888(width, height, data), outputFormat);
+      case BLP_IMAGE_FORMAT.IMAGE_ABGR8888:
+        return new BlpImage(width, height, dxt1ToAbgr8888(width, height, data), outputFormat);
 
       default:
         throw new Error(`Unsupported output format: ${outputFormat}`);
@@ -221,8 +221,8 @@ class Blp {
       case BLP_IMAGE_FORMAT.IMAGE_DXT3:
         return new BlpImage(width, height, data, outputFormat);
 
-      case BLP_IMAGE_FORMAT.IMAGE_RGBA8888:
-        return new BlpImage(width, height, dxt3ToRgba8888(width, height, data), outputFormat);
+      case BLP_IMAGE_FORMAT.IMAGE_ABGR8888:
+        return new BlpImage(width, height, dxt3ToAbgr8888(width, height, data), outputFormat);
 
       default:
         throw new Error(`Unsupported output format: ${outputFormat}`);
@@ -238,8 +238,8 @@ class Blp {
       case BLP_IMAGE_FORMAT.IMAGE_DXT5:
         return new BlpImage(width, height, data, outputFormat);
 
-      case BLP_IMAGE_FORMAT.IMAGE_RGBA8888:
-        return new BlpImage(width, height, dxt5ToRgba8888(width, height, data), outputFormat);
+      case BLP_IMAGE_FORMAT.IMAGE_ABGR8888:
+        return new BlpImage(width, height, dxt5ToAbgr8888(width, height, data), outputFormat);
 
       default:
         throw new Error(`Unsupported output format: ${outputFormat}`);
@@ -252,11 +252,11 @@ class Blp {
     const data = this.#images[level];
 
     switch (outputFormat) {
-      case BLP_IMAGE_FORMAT.IMAGE_RGBA8888:
+      case BLP_IMAGE_FORMAT.IMAGE_ABGR8888:
         return new BlpImage(
           width,
           height,
-          palToRgba8888(width, height, data, this.#palette, this.#alphaSize),
+          palToAbgr8888(width, height, data, this.#palette, this.#alphaSize),
           outputFormat,
         );
       default:

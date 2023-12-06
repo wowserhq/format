@@ -120,19 +120,19 @@ describe('Blp', () => {
         expect(image.width).toBe(512);
         expect(image.height).toBe(512);
         expect(image.data.byteLength).toBe(512 * 512 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
       test('should return image for level 1 and RGBA8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala0.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(256);
         expect(image.height).toBe(256);
         expect(image.data.byteLength).toBe(256 * 256 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
 
@@ -146,19 +146,19 @@ describe('Blp', () => {
         expect(image.width).toBe(32);
         expect(image.height).toBe(32);
         expect(image.data.byteLength).toBe(32 * 32 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
       test('should return image for level 1 and RGBA8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala1.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(16);
         expect(image.height).toBe(16);
         expect(image.data.byteLength).toBe(16 * 16 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
 
@@ -172,19 +172,19 @@ describe('Blp', () => {
         expect(image.width).toBe(128);
         expect(image.height).toBe(128);
         expect(image.data.byteLength).toBe(128 * 128 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
       test('should return image for level 1 and RGBA8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala4.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(64);
         expect(image.height).toBe(64);
         expect(image.data.byteLength).toBe(64 * 64 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
 
@@ -198,19 +198,19 @@ describe('Blp', () => {
         expect(image.width).toBe(128);
         expect(image.height).toBe(64);
         expect(image.data.byteLength).toBe(128 * 64 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
       test('should return image for level 1 and RGBA8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala8.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(64);
         expect(image.height).toBe(32);
         expect(image.data.byteLength).toBe(64 * 32 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
 
@@ -231,12 +231,12 @@ describe('Blp', () => {
         const blp = new Blp();
         blp.load('./fixture/dxt1a.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(8);
         expect(image.height).toBe(8);
         expect(image.data.byteLength).toBe(8 * 8 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
 
@@ -257,12 +257,12 @@ describe('Blp', () => {
         const blp = new Blp();
         blp.load('./fixture/dxt3.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(128);
         expect(image.height).toBe(128);
         expect(image.data.byteLength).toBe(128 * 128 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
 
@@ -283,12 +283,12 @@ describe('Blp', () => {
         const blp = new Blp();
         blp.load('./fixture/dxt5.blp');
 
-        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         expect(image.width).toBe(256);
         expect(image.height).toBe(256);
         expect(image.data.byteLength).toBe(256 * 256 * 4);
-        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_RGBA8888);
+        expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
     });
   });

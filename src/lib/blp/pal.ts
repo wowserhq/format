@@ -1,4 +1,4 @@
-const pala0toRgba8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
+const pala0toAbgr8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
   const output = new Uint8Array(width * height * 4);
 
   for (let i = 0; i < width * height; i++) {
@@ -17,7 +17,7 @@ const pala0toRgba8888 = (width: number, height: number, input: Uint8Array, palet
   return output;
 };
 
-const pala1toRgba8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
+const pala1toAbgr8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
   const output = new Uint8Array(width * height * 4);
   const alphaOfs = width * height;
 
@@ -38,7 +38,7 @@ const pala1toRgba8888 = (width: number, height: number, input: Uint8Array, palet
   return output;
 };
 
-const pala4toRgba8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
+const pala4toAbgr8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
   const output = new Uint8Array(width * height * 4);
   const alphaOfs = width * height;
 
@@ -60,7 +60,7 @@ const pala4toRgba8888 = (width: number, height: number, input: Uint8Array, palet
   return output;
 };
 
-const pala8toRgba8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
+const pala8toAbgr8888 = (width: number, height: number, input: Uint8Array, palette: Uint8Array) => {
   const output = new Uint8Array(width * height * 4);
   const alphaOfs = width * height;
 
@@ -80,7 +80,7 @@ const pala8toRgba8888 = (width: number, height: number, input: Uint8Array, palet
   return output;
 };
 
-const palToRgba8888 = (
+const palToAbgr8888 = (
   width: number,
   height: number,
   input: Uint8Array,
@@ -89,16 +89,16 @@ const palToRgba8888 = (
 ) => {
   switch (alphaSize) {
     case 0:
-      return pala0toRgba8888(width, height, input, palette);
+      return pala0toAbgr8888(width, height, input, palette);
     case 1:
-      return pala1toRgba8888(width, height, input, palette);
+      return pala1toAbgr8888(width, height, input, palette);
     case 4:
-      return pala4toRgba8888(width, height, input, palette);
+      return pala4toAbgr8888(width, height, input, palette);
     case 8:
-      return pala8toRgba8888(width, height, input, palette);
+      return pala8toAbgr8888(width, height, input, palette);
     default:
       throw new Error(`Unsupported alpha size: ${alphaSize}`);
   }
 };
 
-export { palToRgba8888 };
+export { palToAbgr8888 };
