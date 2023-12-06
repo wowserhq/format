@@ -5,7 +5,7 @@ const pala0ToAbgr8888 = (width: number, height: number, input: Uint8Array, palet
     const outOfs = i * 4;
     const palOfs = input[i] * 4;
 
-    // palette is bgr
+    // palette is rgb (little-endian)
     output[outOfs + 0] = palette[palOfs + 2];
     output[outOfs + 1] = palette[palOfs + 1];
     output[outOfs + 2] = palette[palOfs + 0];
@@ -25,7 +25,7 @@ const pala1ToAbgr8888 = (width: number, height: number, input: Uint8Array, palet
     const outOfs = i * 4;
     const palOfs = input[i] * 4;
 
-    // palette is bgr
+    // palette is rgb (little-endian)
     output[outOfs + 0] = palette[palOfs + 2];
     output[outOfs + 1] = palette[palOfs + 1];
     output[outOfs + 2] = palette[palOfs + 0];
@@ -46,7 +46,7 @@ const pala4ToAbgr8888 = (width: number, height: number, input: Uint8Array, palet
     const outOfs = i * 4;
     const palOfs = input[i] * 4;
 
-    // palette is bgr
+    // palette is rgb (little-endian)
     output[outOfs + 0] = palette[palOfs + 2];
     output[outOfs + 1] = palette[palOfs + 1];
     output[outOfs + 2] = palette[palOfs + 0];
@@ -68,7 +68,7 @@ const pala8ToAbgr8888 = (width: number, height: number, input: Uint8Array, palet
     const outOfs = i * 4;
     const palOfs = input[i] * 4;
 
-    // palette is bgr
+    // palette is rgb (little-endian)
     output[outOfs + 0] = palette[palOfs + 2];
     output[outOfs + 1] = palette[palOfs + 1];
     output[outOfs + 2] = palette[palOfs + 0];
