@@ -138,7 +138,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala0.blp');
 
@@ -164,7 +164,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala1.blp');
 
@@ -190,7 +190,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala4.blp');
 
@@ -216,7 +216,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/pala8.blp');
 
@@ -242,7 +242,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_DXT1);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/dxt1a.blp');
 
@@ -268,7 +268,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_DXT3);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/dxt3.blp');
 
@@ -294,7 +294,7 @@ describe('Blp', () => {
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_DXT5);
       });
 
-      test('should return image for level 1 and RGBA8888 format', () => {
+      test('should return image for level 1 and ABGR8888 format', () => {
         const blp = new Blp();
         blp.load('./fixture/dxt5.blp');
 
