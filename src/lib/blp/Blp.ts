@@ -8,6 +8,7 @@ import {
 } from './const.js';
 import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
 import { palToAbgr8888 } from './pal.js';
+import { rawArgb8888ToAbgr8888 } from './raw.js';
 import * as blpIo from './io.js';
 import { getSizeAtMipLevel } from './util.js';
 import BlpImage from './BlpImage.js';
@@ -123,7 +124,7 @@ class Blp {
     }
 
     if (outputFormat === BLP_IMAGE_FORMAT.IMAGE_UNSPECIFIED) {
-      return this.#getRawImage(level);
+      return this.#getUnspecifiedImage(level);
     }
 
     switch (this.#colorFormat) {
@@ -136,6 +137,9 @@ class Blp {
       case BLP_COLOR_FORMAT.COLOR_DXT:
         return this.#getDxtImage(level, outputFormat);
 
+      case BLP_COLOR_FORMAT.COLOR_RAW:
+        return this.#getRawImage(level, outputFormat);
+
       default:
         throw new Error(`Unsupported color format: ${this.#colorFormat}`);
     }
@@ -143,12 +147,12 @@ class Blp {
 
   /**
    * For a given mip level, return a BlpImage containing the unconverted image data from the Blp. If the Blp uses a
-   * palette, the image data will be converted to IMAGE_FORMAT.IMAGE_RGBA8888 before being returned.
+   * palette, the image data will be converted to IMAGE_FORMAT.IMAGE_ABGR8888 before being returned.
    *
    * @param level
    * @private
    */
-  #getRawImage(level: number) {
+  #getUnspecifiedImage(level: number) {
     switch (this.#colorFormat) {
       case BLP_COLOR_FORMAT.COLOR_PAL:
         // Images using palettes are only useful when decoded
@@ -168,6 +172,9 @@ class Blp {
           default:
             throw new Error(`Unsupported pixel format: ${this.#preferredFormat}`);
         }
+
+      case BLP_COLOR_FORMAT.COLOR_RAW:
+        return this.#getRawImage(level, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
 
       default:
         throw new Error(`Unsupported color format: ${this.#colorFormat}`);
@@ -259,6 +266,28 @@ class Blp {
           palToAbgr8888(width, height, data, this.#palette, this.#alphaSize),
           outputFormat,
         );
+      default:
+        throw new Error(`Unsupported output format: ${outputFormat}`);
+    }
+  }
+
+  #getRawImage(level: number, outputFormat: BLP_IMAGE_FORMAT): BlpImage {
+    const width = getSizeAtMipLevel(this.#width, level);
+    const height = getSizeAtMipLevel(this.#height, level);
+    const data = this.#images[level];
+
+    switch (outputFormat) {
+      case BLP_IMAGE_FORMAT.IMAGE_ARGB8888:
+        return new BlpImage(width, height, data, outputFormat);
+
+      case BLP_IMAGE_FORMAT.IMAGE_ABGR8888:
+        return new BlpImage(
+          width,
+          height,
+          rawArgb8888ToAbgr8888(width, height, data),
+          outputFormat,
+        );
+
       default:
         throw new Error(`Unsupported output format: ${outputFormat}`);
     }
