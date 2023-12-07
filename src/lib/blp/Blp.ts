@@ -174,13 +174,7 @@ class Blp {
         }
 
       case BLP_COLOR_FORMAT.COLOR_RAW:
-        switch (this.#preferredFormat) {
-          case BLP_PIXEL_FORMAT.PIXEL_ARGB8888:
-            return this.#getRawArgb8888Image(level, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
-
-          default:
-            throw new Error(`Unsupported pixel format: ${this.#preferredFormat}`);
-        }
+        return this.#getRawImage(level, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
 
       default:
         throw new Error(`Unsupported color format: ${this.#colorFormat}`);
@@ -278,16 +272,6 @@ class Blp {
   }
 
   #getRawImage(level: number, outputFormat: BLP_IMAGE_FORMAT): BlpImage {
-    switch (this.#preferredFormat) {
-      case BLP_PIXEL_FORMAT.PIXEL_ARGB8888:
-        return this.#getRawArgb8888Image(level, outputFormat);
-
-      default:
-        throw new Error(`Unsupported pixel format: ${this.#preferredFormat}`);
-    }
-  }
-
-  #getRawArgb8888Image(level: number, outputFormat: BLP_IMAGE_FORMAT): BlpImage {
     const width = getSizeAtMipLevel(this.#width, level);
     const height = getSizeAtMipLevel(this.#height, level);
     const data = this.#images[level];
