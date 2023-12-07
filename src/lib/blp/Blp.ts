@@ -8,10 +8,10 @@ import {
 } from './const.js';
 import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
 import { palToAbgr8888 } from './pal.js';
+import { rawArgb8888ToAbgr8888 } from './raw.js';
 import * as blpIo from './io.js';
 import { getSizeAtMipLevel } from './util.js';
 import BlpImage from './BlpImage.js';
-import { rawArgb8888ToAbgr8888 } from './raw.js';
 
 class Blp {
   #magic = BLP_MAGIC;
