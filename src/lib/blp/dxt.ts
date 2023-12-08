@@ -43,14 +43,14 @@ const dxt1GenerateColorLookup = (color0: number, color1: number) => {
   COLOR_LOOKUP[7] = 255;
 
   if (color0 > color1) {
-    COLOR_LOOKUP[ 8] = ((2 * r0 + 1 * r1) / 3) | 0;
-    COLOR_LOOKUP[ 9] = ((2 * g0 + 1 * g1) / 3) | 0;
-    COLOR_LOOKUP[10] = ((2 * b0 + 1 * b1) / 3) | 0;
+    COLOR_LOOKUP[ 8] = ((2 * r0 + r1) / 3) | 0;
+    COLOR_LOOKUP[ 9] = ((2 * g0 + g1) / 3) | 0;
+    COLOR_LOOKUP[10] = ((2 * b0 + b1) / 3) | 0;
     COLOR_LOOKUP[11] = 255;
 
-    COLOR_LOOKUP[12] = ((1 * r0 + 2 * r1) / 3) | 0;
-    COLOR_LOOKUP[13] = ((1 * g0 + 2 * g1) / 3) | 0;
-    COLOR_LOOKUP[14] = ((1 * b0 + 2 * b1) / 3) | 0;
+    COLOR_LOOKUP[12] = ((r0 + 2 * r1) / 3) | 0;
+    COLOR_LOOKUP[13] = ((g0 + 2 * g1) / 3) | 0;
+    COLOR_LOOKUP[14] = ((b0 + 2 * b1) / 3) | 0;
     COLOR_LOOKUP[15] = 255;
   } else {
     COLOR_LOOKUP[ 8] = ((r0 + r1) / 2) | 0;
