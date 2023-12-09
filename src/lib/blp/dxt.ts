@@ -5,6 +5,10 @@
  * https://github.com/LordVonAdel/dxtn
  * Copyright (c) 2021 Adrian Urban
  * Licensed under the MIT license
+ *
+ * Also based in part on squish
+ * Copyright (c) 2006 Simon Brown
+ * Licensed under the MIT license
  */
 
 const DXT_BLOCK_WIDTH = 4;
@@ -119,8 +123,14 @@ const dxt3DecompressBlock = (block: Uint8Array) => {
   dxt1DecompressBlock(block.subarray(8, 16));
 
   for (let i = 0; i < 8; i++) {
-    DECOMPRESSED[i * 8 + 3] = (block[i] & 0x0f) << 4;
-    DECOMPRESSED[i * 8 + 7] = block[i] & 0xf0;
+    const pixelOfs = i * 8;
+
+    const quant = block[i];
+    const lo = quant & 0x0f;
+    const hi = quant & 0xf0;
+
+    DECOMPRESSED[pixelOfs + 3] = lo | (lo << 4);
+    DECOMPRESSED[pixelOfs + 7] = hi | (hi >> 4);
   }
 };
 
