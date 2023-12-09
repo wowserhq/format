@@ -38,9 +38,9 @@ const unpack565 = (color: number) => {
 };
 
 // prettier-ignore
-const dxt1GenerateColorLookup = (block: Uint8Array) => {
-  const color0 = (block[1] << 8) + block[0];
-  const color1 = (block[3] << 8) + block[2];
+const dxt1GenerateColorLookup = (blockData: Uint8Array, blockOfs: number) => {
+  const color0 = (blockData[blockOfs + 1] << 8) + blockData[blockOfs + 0];
+  const color1 = (blockData[blockOfs + 3] << 8) + blockData[blockOfs + 2];
 
   const [r0, g0, b0] = unpack565(color0);
   const [r1, g1, b1] = unpack565(color1);
@@ -79,52 +79,48 @@ const dxt1GenerateColorLookup = (block: Uint8Array) => {
 };
 
 // prettier-ignore
-const dxt1GenerateColorIndices = (block: Uint8Array) => {
-  const packed0 = block[4];
-  COLOR_INDICES_8[ 0] =  packed0       & 0x3;
-  COLOR_INDICES_8[ 1] = (packed0 >> 2) & 0x3;
-  COLOR_INDICES_8[ 2] = (packed0 >> 4) & 0x3;
-  COLOR_INDICES_8[ 3] = (packed0 >> 6) & 0x3;
+const dxt1GenerateColorIndices = (blockData: Uint8Array, blockOfs: number) => {
+  const packed4 = blockData[blockOfs + 4];
+  COLOR_INDICES_8[ 0] =  packed4       & 0x3;
+  COLOR_INDICES_8[ 1] = (packed4 >> 2) & 0x3;
+  COLOR_INDICES_8[ 2] = (packed4 >> 4) & 0x3;
+  COLOR_INDICES_8[ 3] = (packed4 >> 6) & 0x3;
 
-  const packed1 = block[5];
-  COLOR_INDICES_8[ 4] =  packed1       & 0x3;
-  COLOR_INDICES_8[ 5] = (packed1 >> 2) & 0x3;
-  COLOR_INDICES_8[ 6] = (packed1 >> 4) & 0x3;
-  COLOR_INDICES_8[ 7] = (packed1 >> 6) & 0x3;
+  const packed5 = blockData[blockOfs + 5];
+  COLOR_INDICES_8[ 4] =  packed5       & 0x3;
+  COLOR_INDICES_8[ 5] = (packed5 >> 2) & 0x3;
+  COLOR_INDICES_8[ 6] = (packed5 >> 4) & 0x3;
+  COLOR_INDICES_8[ 7] = (packed5 >> 6) & 0x3;
 
-  const packed2 = block[6];
-  COLOR_INDICES_8[ 8] =  packed2       & 0x3;
-  COLOR_INDICES_8[ 9] = (packed2 >> 2) & 0x3;
-  COLOR_INDICES_8[10] = (packed2 >> 4) & 0x3;
-  COLOR_INDICES_8[11] = (packed2 >> 6) & 0x3;
+  const packed6 = blockData[blockOfs + 6];
+  COLOR_INDICES_8[ 8] =  packed6       & 0x3;
+  COLOR_INDICES_8[ 9] = (packed6 >> 2) & 0x3;
+  COLOR_INDICES_8[10] = (packed6 >> 4) & 0x3;
+  COLOR_INDICES_8[11] = (packed6 >> 6) & 0x3;
 
-  const packed3 = block[7];
-  COLOR_INDICES_8[12] =  packed3       & 0x3;
-  COLOR_INDICES_8[13] = (packed3 >> 2) & 0x3;
-  COLOR_INDICES_8[14] = (packed3 >> 4) & 0x3;
-  COLOR_INDICES_8[15] = (packed3 >> 6) & 0x3;
+  const packed7 = blockData[blockOfs + 7];
+  COLOR_INDICES_8[12] =  packed7       & 0x3;
+  COLOR_INDICES_8[13] = (packed7 >> 2) & 0x3;
+  COLOR_INDICES_8[14] = (packed7 >> 4) & 0x3;
+  COLOR_INDICES_8[15] = (packed7 >> 6) & 0x3;
 };
 
-const dxt1DecompressBlock = (block: Uint8Array) => {
-  if (block.byteLength != DXT1_BLOCK_SIZE) {
-    return;
-  }
-
-  dxt1GenerateColorLookup(block);
-  dxt1GenerateColorIndices(block);
+const dxt1DecompressBlock = (blockData: Uint8Array, blockOfs: number) => {
+  dxt1GenerateColorLookup(blockData, blockOfs);
+  dxt1GenerateColorIndices(blockData, blockOfs);
 
   for (let i = 0; i < 16; ++i) {
     DECOMPRESSED_32[i] = COLOR_LOOKUP_32[COLOR_INDICES_8[i]];
   }
 };
 
-const dxt3DecompressBlock = (block: Uint8Array) => {
-  dxt1DecompressBlock(block.subarray(8, 16));
+const dxt3DecompressBlock = (blockData: Uint8Array, blockOfs: number) => {
+  dxt1DecompressBlock(blockData, blockOfs + 8);
 
   for (let i = 0; i < 8; i++) {
     const pixelOfs = i * 8;
 
-    const quant = block[i];
+    const quant = blockData[blockOfs + i];
     const lo = quant & 0x0f;
     const hi = quant & 0xf0;
 
@@ -155,30 +151,36 @@ const dxt5GenerateAlphaLookup = (alpha0: number, alpha1: number) => {
 };
 
 // prettier-ignore
-const dxt5DecompressBlock = (block: Uint8Array) => {
-  dxt1DecompressBlock(block.subarray(8, 16));
+const dxt5DecompressBlock = (blockData: Uint8Array, blockOfs: number) => {
+  dxt1DecompressBlock(blockData, blockOfs + 8);
 
-  const alpha0 = block[0];
-  const alpha1 = block[1];
+  const alpha0 = blockData[blockOfs + 0];
+  const alpha1 = blockData[blockOfs + 1];
   dxt5GenerateAlphaLookup(alpha0, alpha1);
 
-  DECOMPRESSED_8[31] = ALPHA_LOOKUP[ (block[4] & 0b11100000) >> 5];
-  DECOMPRESSED_8[27] = ALPHA_LOOKUP[ (block[4] & 0b00011100) >> 2];
-  DECOMPRESSED_8[23] = ALPHA_LOOKUP[((block[4] & 0b00000011) << 1) + ((block[3] & 0b10000000) >> 7)];
-  DECOMPRESSED_8[19] = ALPHA_LOOKUP[ (block[3] & 0b01110000) >> 4];
-  DECOMPRESSED_8[15] = ALPHA_LOOKUP[ (block[3] & 0b00001110) >> 1];
-  DECOMPRESSED_8[11] = ALPHA_LOOKUP[((block[3] & 0b00000001) << 2) + ((block[2] & 0b11000000) >> 6)];
-  DECOMPRESSED_8[ 7] = ALPHA_LOOKUP[ (block[2] & 0b00111000) >> 3];
-  DECOMPRESSED_8[ 3] = ALPHA_LOOKUP[ (block[2] & 0b00000111) >> 0];
+  const packed2 = blockData[blockOfs + 2];
+  const packed3 = blockData[blockOfs + 3];
+  const packed4 = blockData[blockOfs + 4];
+  DECOMPRESSED_8[31] = ALPHA_LOOKUP[ (packed4 & 0b11100000) >> 5];
+  DECOMPRESSED_8[27] = ALPHA_LOOKUP[ (packed4 & 0b00011100) >> 2];
+  DECOMPRESSED_8[23] = ALPHA_LOOKUP[((packed4 & 0b00000011) << 1) + ((packed3 & 0b10000000) >> 7)];
+  DECOMPRESSED_8[19] = ALPHA_LOOKUP[ (packed3 & 0b01110000) >> 4];
+  DECOMPRESSED_8[15] = ALPHA_LOOKUP[ (packed3 & 0b00001110) >> 1];
+  DECOMPRESSED_8[11] = ALPHA_LOOKUP[((packed3 & 0b00000001) << 2) + ((packed2 & 0b11000000) >> 6)];
+  DECOMPRESSED_8[ 7] = ALPHA_LOOKUP[ (packed2 & 0b00111000) >> 3];
+  DECOMPRESSED_8[ 3] = ALPHA_LOOKUP[ (packed2 & 0b00000111) >> 0];
 
-  DECOMPRESSED_8[63] = ALPHA_LOOKUP[ (block[7] & 0b11100000) >> 5];
-  DECOMPRESSED_8[59] = ALPHA_LOOKUP[ (block[7] & 0b00011100) >> 2];
-  DECOMPRESSED_8[55] = ALPHA_LOOKUP[((block[7] & 0b00000011) << 1) + ((block[6] & 0b10000000) >> 7)];
-  DECOMPRESSED_8[51] = ALPHA_LOOKUP[ (block[6] & 0b01110000) >> 4];
-  DECOMPRESSED_8[47] = ALPHA_LOOKUP[ (block[6] & 0b00001110) >> 1];
-  DECOMPRESSED_8[43] = ALPHA_LOOKUP[((block[6] & 0b00000001) << 2) + ((block[5] & 0b11000000) >> 6)];
-  DECOMPRESSED_8[39] = ALPHA_LOOKUP[ (block[5] & 0b00111000) >> 3];
-  DECOMPRESSED_8[35] = ALPHA_LOOKUP[ (block[5] & 0b00000111) >> 0];
+  const packed5 = blockData[blockOfs + 5];
+  const packed6 = blockData[blockOfs + 6];
+  const packed7 = blockData[blockOfs + 7];
+  DECOMPRESSED_8[63] = ALPHA_LOOKUP[ (packed7 & 0b11100000) >> 5];
+  DECOMPRESSED_8[59] = ALPHA_LOOKUP[ (packed7 & 0b00011100) >> 2];
+  DECOMPRESSED_8[55] = ALPHA_LOOKUP[((packed7 & 0b00000011) << 1) + ((packed6 & 0b10000000) >> 7)];
+  DECOMPRESSED_8[51] = ALPHA_LOOKUP[ (packed6 & 0b01110000) >> 4];
+  DECOMPRESSED_8[47] = ALPHA_LOOKUP[ (packed6 & 0b00001110) >> 1];
+  DECOMPRESSED_8[43] = ALPHA_LOOKUP[((packed6 & 0b00000001) << 2) + ((packed5 & 0b11000000) >> 6)];
+  DECOMPRESSED_8[39] = ALPHA_LOOKUP[ (packed5 & 0b00111000) >> 3];
+  DECOMPRESSED_8[35] = ALPHA_LOOKUP[ (packed5 & 0b00000111) >> 0];
 };
 
 const dxtToAbgr8888 = (
@@ -186,7 +188,7 @@ const dxtToAbgr8888 = (
   height: number,
   input: Uint8Array,
   blockSize: number,
-  decompressBlock: (block: Uint8Array) => void,
+  decompressBlock: (block: Uint8Array, blockOfs: number) => void,
 ) => {
   if (width % DXT_BLOCK_WIDTH !== 0) {
     throw new Error(`Texture width is not a multiple of ${DXT_BLOCK_WIDTH}: ${width}`);
@@ -211,8 +213,7 @@ const dxtToAbgr8888 = (
   const output32 = new Uint32Array(output);
 
   for (let i = 0; i < bc; i++) {
-    const block = input.subarray(blockSize * i, blockSize * (i + 1));
-    decompressBlock(block);
+    decompressBlock(input, blockSize * i);
 
     const sx = (i % bw) * 4;
     const sy = ((i / bw) | 0) * 4;
