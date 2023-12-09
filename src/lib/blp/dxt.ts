@@ -16,6 +16,7 @@ const DXT5_BLOCK_SIZE = 16;
 const RGBA_BLOCK_SIZE = 64;
 
 const COLOR_LOOKUP = new Uint8Array(16);
+const COLOR_INDICES = new Uint8Array(16);
 const ALPHA_LOOKUP = new Uint8Array(8);
 const DECOMPRESSED = new Uint8Array(RGBA_BLOCK_SIZE);
 
@@ -28,7 +29,10 @@ const unpack565 = (color: number) => {
 };
 
 // prettier-ignore
-const dxt1GenerateColorLookup = (color0: number, color1: number) => {
+const dxt1GenerateColorLookup = (block: Uint8Array) => {
+  const color0 = (block[1] << 8) + block[0];
+  const color1 = (block[3] << 8) + block[2];
+
   const [r0, g0, b0] = unpack565(color0);
   const [r1, g1, b1] = unpack565(color1);
 
@@ -65,24 +69,49 @@ const dxt1GenerateColorLookup = (color0: number, color1: number) => {
   }
 };
 
+// prettier-ignore
+const dxt1GenerateColorIndices = (block: Uint8Array) => {
+  const packed0 = block[4];
+  COLOR_INDICES[ 0] =  packed0       & 0x3;
+  COLOR_INDICES[ 1] = (packed0 >> 2) & 0x3;
+  COLOR_INDICES[ 2] = (packed0 >> 4) & 0x3;
+  COLOR_INDICES[ 3] = (packed0 >> 6) & 0x3;
+
+  const packed1 = block[5];
+  COLOR_INDICES[ 4] =  packed1       & 0x3;
+  COLOR_INDICES[ 5] = (packed1 >> 2) & 0x3;
+  COLOR_INDICES[ 6] = (packed1 >> 4) & 0x3;
+  COLOR_INDICES[ 7] = (packed1 >> 6) & 0x3;
+
+  const packed2 = block[6];
+  COLOR_INDICES[ 8] =  packed2       & 0x3;
+  COLOR_INDICES[ 9] = (packed2 >> 2) & 0x3;
+  COLOR_INDICES[10] = (packed2 >> 4) & 0x3;
+  COLOR_INDICES[11] = (packed2 >> 6) & 0x3;
+
+  const packed3 = block[7];
+  COLOR_INDICES[12] =  packed3       & 0x3;
+  COLOR_INDICES[13] = (packed3 >> 2) & 0x3;
+  COLOR_INDICES[14] = (packed3 >> 4) & 0x3;
+  COLOR_INDICES[15] = (packed3 >> 6) & 0x3;
+};
+
 const dxt1DecompressBlock = (block: Uint8Array) => {
   if (block.byteLength != DXT1_BLOCK_SIZE) {
     return;
   }
 
-  const color0 = (block[1] << 8) + block[0];
-  const color1 = (block[3] << 8) + block[2];
-  dxt1GenerateColorLookup(color0, color1);
+  dxt1GenerateColorLookup(block);
+  dxt1GenerateColorIndices(block);
 
-  for (let i = 0; i < 16; i++) {
-    const bitOfs = i * 2;
-    const byteOfs = 4 + ((bitOfs / 8) | 0);
-    const bits = (block[byteOfs] >> bitOfs % 8) & 3;
+  for (let i = 0; i < 16; ++i) {
+    const pixelOfs = 4 * i;
+    const lookupOfs = 4 * COLOR_INDICES[i];
 
-    DECOMPRESSED[i * 4 + 0] = COLOR_LOOKUP[bits * 4 + 0];
-    DECOMPRESSED[i * 4 + 1] = COLOR_LOOKUP[bits * 4 + 1];
-    DECOMPRESSED[i * 4 + 2] = COLOR_LOOKUP[bits * 4 + 2];
-    DECOMPRESSED[i * 4 + 3] = COLOR_LOOKUP[bits * 4 + 3];
+    DECOMPRESSED[pixelOfs + 0] = COLOR_LOOKUP[lookupOfs + 0];
+    DECOMPRESSED[pixelOfs + 1] = COLOR_LOOKUP[lookupOfs + 1];
+    DECOMPRESSED[pixelOfs + 2] = COLOR_LOOKUP[lookupOfs + 2];
+    DECOMPRESSED[pixelOfs + 3] = COLOR_LOOKUP[lookupOfs + 3];
   }
 };
 
