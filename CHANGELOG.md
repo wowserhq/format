@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/wowserhq/format/compare/v0.3.0...v0.4.0) (2023-12-09)
+
+
+### Features
+
+* **blp:** improve dxt decompression performance ([d197175](https://github.com/wowserhq/format/commit/d1971754944f6efdfe041f8b8d7a5e670262f36b))
+
+
+### Bug Fixes
+
+* **blp:** correct accuracy of dxt3 alpha decompression ([0a13003](https://github.com/wowserhq/format/commit/0a13003949330b6618d3c183deb55159ad8a141b))
+
 ## [0.3.0](https://github.com/wowserhq/format/compare/v0.2.0...v0.3.0) (2023-12-07)
 
 
