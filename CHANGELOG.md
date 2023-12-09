@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/wowserhq/format/compare/v0.4.0...v0.5.0) (2023-12-09)
+
+
+### Features
+
+* **blp:** reduce allocations in dxt compression logic ([b863f8e](https://github.com/wowserhq/format/commit/b863f8e378707676c6293b8e8da8cc39f2f0cd4c))
+
 ## [0.4.0](https://github.com/wowserhq/format/compare/v0.3.0...v0.4.0) (2023-12-09)
 
 
