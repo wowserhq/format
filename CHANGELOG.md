@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/wowserhq/format/compare/v0.5.0...v0.6.0) (2023-12-10)
+
+
+### Features
+
+* **blp:** continue improving dxt decompression performance ([61ce439](https://github.com/wowserhq/format/commit/61ce439e0c1fe7a0dc5923edae874463aa9c535a))
+
 ## [0.5.0](https://github.com/wowserhq/format/compare/v0.4.0...v0.5.0) (2023-12-09)
 
 
