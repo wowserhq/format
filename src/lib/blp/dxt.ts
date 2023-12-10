@@ -105,13 +105,27 @@ const dxt1GenerateColorIndices = (blockData: Uint8Array, blockOfs: number) => {
   COLOR_INDICES_8[15] = (packed7 >> 6) & 0x3;
 };
 
+// prettier-ignore
 const dxt1DecompressBlock = (blockData: Uint8Array, blockOfs: number) => {
   dxt1GenerateColorLookup(blockData, blockOfs);
   dxt1GenerateColorIndices(blockData, blockOfs);
 
-  for (let i = 0; i < 16; ++i) {
-    DECOMPRESSED_32[i] = COLOR_LOOKUP_32[COLOR_INDICES_8[i]];
-  }
+  DECOMPRESSED_32[ 0] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 0]];
+  DECOMPRESSED_32[ 1] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 1]];
+  DECOMPRESSED_32[ 2] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 2]];
+  DECOMPRESSED_32[ 3] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 3]];
+  DECOMPRESSED_32[ 4] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 4]];
+  DECOMPRESSED_32[ 5] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 5]];
+  DECOMPRESSED_32[ 6] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 6]];
+  DECOMPRESSED_32[ 7] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 7]];
+  DECOMPRESSED_32[ 8] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 8]];
+  DECOMPRESSED_32[ 9] = COLOR_LOOKUP_32[COLOR_INDICES_8[ 9]];
+  DECOMPRESSED_32[10] = COLOR_LOOKUP_32[COLOR_INDICES_8[10]];
+  DECOMPRESSED_32[11] = COLOR_LOOKUP_32[COLOR_INDICES_8[11]];
+  DECOMPRESSED_32[12] = COLOR_LOOKUP_32[COLOR_INDICES_8[12]];
+  DECOMPRESSED_32[13] = COLOR_LOOKUP_32[COLOR_INDICES_8[13]];
+  DECOMPRESSED_32[14] = COLOR_LOOKUP_32[COLOR_INDICES_8[14]];
+  DECOMPRESSED_32[15] = COLOR_LOOKUP_32[COLOR_INDICES_8[15]];
 };
 
 const dxt3DecompressBlock = (blockData: Uint8Array, blockOfs: number) => {
@@ -212,21 +226,36 @@ const dxtToAbgr8888 = (
   const output8 = new Uint8Array(output);
   const output32 = new Uint32Array(output);
 
-  for (let i = 0; i < bc; i++) {
-    decompressBlock(input, blockSize * i);
+  let blockOfs = 0;
+  for (let by = 0, py = 0; by < bh; by++, py += DXT_BLOCK_HEIGHT) {
+    for (let bx = 0, px = 0; bx < bw; bx++, px += DXT_BLOCK_WIDTH) {
+      decompressBlock(input, blockOfs);
 
-    const sx = (i % bw) * 4;
-    const sy = ((i / bw) | 0) * 4;
+      let pixelOfs = (py + 0) * width + px;
+      output32[pixelOfs + 0] = DECOMPRESSED_32[0];
+      output32[pixelOfs + 1] = DECOMPRESSED_32[1];
+      output32[pixelOfs + 2] = DECOMPRESSED_32[2];
+      output32[pixelOfs + 3] = DECOMPRESSED_32[3];
 
-    let d = 0;
-    for (let y = 0; y < 4; y++) {
-      for (let x = 0; x < 4; x++) {
-        const p = x + sx + (y + sy) * width;
+      pixelOfs = (py + 1) * width + px;
+      output32[pixelOfs + 0] = DECOMPRESSED_32[4];
+      output32[pixelOfs + 1] = DECOMPRESSED_32[5];
+      output32[pixelOfs + 2] = DECOMPRESSED_32[6];
+      output32[pixelOfs + 3] = DECOMPRESSED_32[7];
 
-        output32[p] = DECOMPRESSED_32[d];
+      pixelOfs = (py + 2) * width + px;
+      output32[pixelOfs + 0] = DECOMPRESSED_32[8];
+      output32[pixelOfs + 1] = DECOMPRESSED_32[9];
+      output32[pixelOfs + 2] = DECOMPRESSED_32[10];
+      output32[pixelOfs + 3] = DECOMPRESSED_32[11];
 
-        d += 1;
-      }
+      pixelOfs = (py + 3) * width + px;
+      output32[pixelOfs + 0] = DECOMPRESSED_32[12];
+      output32[pixelOfs + 1] = DECOMPRESSED_32[13];
+      output32[pixelOfs + 2] = DECOMPRESSED_32[14];
+      output32[pixelOfs + 3] = DECOMPRESSED_32[15];
+
+      blockOfs += blockSize;
     }
   }
 
