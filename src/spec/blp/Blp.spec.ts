@@ -12,7 +12,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_PAL);
         expect(blp.alphaSize).toBe(0);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(512);
         expect(blp.height).toBe(512);
       });
@@ -27,7 +26,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_PAL);
         expect(blp.alphaSize).toBe(1);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(32);
         expect(blp.height).toBe(32);
       });
@@ -42,7 +40,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_PAL);
         expect(blp.alphaSize).toBe(4);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(128);
         expect(blp.height).toBe(128);
       });
@@ -57,7 +54,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_PAL);
         expect(blp.alphaSize).toBe(8);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(128);
         expect(blp.height).toBe(64);
       });
@@ -72,7 +68,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_DXT);
         expect(blp.alphaSize).toBe(1);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(16);
         expect(blp.height).toBe(16);
       });
@@ -87,7 +82,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_DXT);
         expect(blp.alphaSize).toBe(8);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(256);
         expect(blp.height).toBe(256);
       });
@@ -102,7 +96,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_DXT);
         expect(blp.alphaSize).toBe(8);
-        expect(blp.hasMips).toBe(1);
         expect(blp.width).toBe(512);
         expect(blp.height).toBe(512);
       });
@@ -117,7 +110,6 @@ describe('Blp', () => {
         expect(blp.formatVersion).toBe(1);
         expect(blp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
         expect(blp.alphaSize).toBe(136);
-        expect(blp.hasMips).toBe(0);
         expect(blp.width).toBe(256);
         expect(blp.height).toBe(256);
       });

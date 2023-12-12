@@ -19,7 +19,6 @@ class Blp {
   #colorFormat = BLP_COLOR_FORMAT.COLOR_DXT;
   #alphaSize = 0;
   #preferredFormat = BLP_PIXEL_FORMAT.PIXEL_DXT5;
-  #hasMips = 0;
   #width = 0;
   #height = 0;
   #images: Uint8Array[] = [];
@@ -54,7 +53,6 @@ class Blp {
     this.#colorFormat = header.colorFormat;
     this.#alphaSize = header.alphaSize;
     this.#preferredFormat = header.preferredFormat;
-    this.#hasMips = header.hasMips;
     this.#width = header.width;
     this.#height = header.height;
 
@@ -99,10 +97,6 @@ class Blp {
 
   get alphaSize() {
     return this.#alphaSize;
-  }
-
-  get hasMips() {
-    return this.#hasMips;
   }
 
   get width() {
@@ -297,7 +291,6 @@ class Blp {
     this.#colorFormat = BLP_COLOR_FORMAT.COLOR_DXT;
     this.#preferredFormat = BLP_PIXEL_FORMAT.PIXEL_DXT5;
     this.#alphaSize = 0;
-    this.#hasMips = 0;
     this.#width = 0;
     this.#height = 0;
     this.#images = [];
