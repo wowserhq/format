@@ -148,6 +148,15 @@ describe('Blp', () => {
         expect(image.height).toBe(256);
         expect(image.data.byteLength).toBe(256 * 256 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([196, 147, 114, 255]));
+
+        const middlePixel = image.data.subarray(131068, 131072);
+        expect(middlePixel).toStrictEqual(new Uint8Array([138, 76, 43, 255]));
+
+        const lastPixel = image.data.subarray(262140, 262144);
+        expect(lastPixel).toStrictEqual(new Uint8Array([147, 83, 46, 255]));
       });
     });
 
@@ -174,6 +183,15 @@ describe('Blp', () => {
         expect(image.height).toBe(16);
         expect(image.data.byteLength).toBe(16 * 16 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([96, 115, 123, 255]));
+
+        const middlePixel = image.data.subarray(508, 512);
+        expect(middlePixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
+
+        const lastPixel = image.data.subarray(1020, 1024);
+        expect(lastPixel).toStrictEqual(new Uint8Array([84, 52, 26, 255]));
       });
     });
 
@@ -200,6 +218,15 @@ describe('Blp', () => {
         expect(image.height).toBe(64);
         expect(image.data.byteLength).toBe(64 * 64 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([10, 5, 8, 255]));
+
+        const middlePixel = image.data.subarray(8188, 8192);
+        expect(middlePixel).toStrictEqual(new Uint8Array([1, 0, 0, 0]));
+
+        const lastPixel = image.data.subarray(16380, 16384);
+        expect(lastPixel).toStrictEqual(new Uint8Array([1, 0, 0, 0]));
       });
     });
 
@@ -226,6 +253,15 @@ describe('Blp', () => {
         expect(image.height).toBe(32);
         expect(image.data.byteLength).toBe(64 * 32 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([26, 31, 39, 255]));
+
+        const middlePixel = image.data.subarray(4092, 4096);
+        expect(middlePixel).toStrictEqual(new Uint8Array([1, 2, 1, 6]));
+
+        const lastPixel = image.data.subarray(8188, 8192);
+        expect(lastPixel).toStrictEqual(new Uint8Array([30, 28, 30, 16]));
       });
     });
 
@@ -252,6 +288,15 @@ describe('Blp', () => {
         expect(image.height).toBe(8);
         expect(image.data.byteLength).toBe(8 * 8 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([165, 134, 0, 255]));
+
+        const middlePixel = image.data.subarray(124, 128);
+        expect(middlePixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
+
+        const lastPixel = image.data.subarray(252, 256);
+        expect(lastPixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
       });
     });
 
@@ -278,6 +323,15 @@ describe('Blp', () => {
         expect(image.height).toBe(128);
         expect(image.data.byteLength).toBe(128 * 128 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([206, 142, 2, 0]));
+
+        const middlePixel = image.data.subarray(32764, 32768);
+        expect(middlePixel).toStrictEqual(new Uint8Array([123, 77, 24, 68]));
+
+        const lastPixel = image.data.subarray(65532, 65536);
+        expect(lastPixel).toStrictEqual(new Uint8Array([164, 117, 30, 0]));
       });
     });
 
@@ -304,6 +358,15 @@ describe('Blp', () => {
         expect(image.height).toBe(256);
         expect(image.data.byteLength).toBe(256 * 256 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([57, 28, 24, 241]));
+
+        const middlePixel = image.data.subarray(131068, 131072);
+        expect(middlePixel).toStrictEqual(new Uint8Array([41, 38, 38, 147]));
+
+        const lastPixel = image.data.subarray(262140, 262144);
+        expect(lastPixel).toStrictEqual(new Uint8Array([27, 26, 35, 221]));
       });
     });
 
@@ -330,6 +393,15 @@ describe('Blp', () => {
         expect(image.height).toBe(256);
         expect(image.data.byteLength).toBe(256 * 256 * 4);
         expect(image.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const firstPixel = image.data.subarray(0, 4);
+        expect(firstPixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
+
+        const middlePixel = image.data.subarray(131068, 131072);
+        expect(middlePixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
+
+        const lastPixel = image.data.subarray(262140, 262144);
+        expect(lastPixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
       });
     });
   });
