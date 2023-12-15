@@ -1,5 +1,6 @@
 import Blp, { BLP_COLOR_FORMAT, BLP_IMAGE_FORMAT } from '../../lib/blp/Blp.js';
 import { describe, expect, test } from 'vitest';
+import * as fs from 'fs';
 
 describe('Blp', () => {
   describe('load', () => {
@@ -395,6 +396,68 @@ describe('Blp', () => {
         const lastPixel = image.data.subarray(262140, 262144);
         expect(lastPixel).toStrictEqual(new Uint8Array([0, 0, 0, 0]));
       });
+    });
+  });
+
+  describe('save', () => {
+    test('should save empty blp', () => {
+      const blp = new Blp();
+      const data = blp.save();
+
+      const loadedBlp = new Blp();
+      loadedBlp.load(data);
+
+      expect(loadedBlp.magic).toBe('BLP2');
+      expect(loadedBlp.formatVersion).toBe(1);
+      expect(loadedBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_DXT);
+      expect(loadedBlp.width).toBe(0);
+      expect(loadedBlp.height).toBe(0);
+      expect(loadedBlp.alphaSize).toBe(0);
+    });
+
+    test('should save raw blp', () => {
+      const blp = new Blp();
+      blp.load('./fixture/raw.blp');
+      const savedData = blp.save();
+
+      const originalBuffer = fs.readFileSync('./fixture/raw.blp');
+      const originalData = new Uint8Array(originalBuffer.buffer);
+
+      // header
+      expect(savedData.subarray(0, 1172)).toEqual(originalData.subarray(0, 1172));
+
+      // mips
+      expect(savedData.subarray(1172)).toEqual(originalData.subarray(1172));
+    });
+
+    test('should save dxt blp', () => {
+      const blp = new Blp();
+      blp.load('./fixture/dxt3.blp');
+      const savedData = blp.save();
+
+      const originalBuffer = fs.readFileSync('./fixture/dxt3.blp');
+      const originalData = new Uint8Array(originalBuffer.buffer);
+
+      // header
+      expect(savedData.subarray(0, 1172)).toEqual(originalData.subarray(0, 1172));
+
+      // mips
+      expect(savedData.subarray(1172)).toEqual(originalData.subarray(1172));
+    });
+
+    test('should save pal blp', () => {
+      const blp = new Blp();
+      blp.load('./fixture/pala4.blp');
+      const savedData = blp.save();
+
+      const originalBuffer = fs.readFileSync('./fixture/pala4.blp');
+      const originalData = new Uint8Array(originalBuffer.buffer);
+
+      // header
+      expect(savedData.subarray(0, 1172)).toEqual(originalData.subarray(0, 1172));
+
+      // mips
+      expect(savedData.subarray(1172)).toEqual(originalData.subarray(1172));
     });
   });
 });
