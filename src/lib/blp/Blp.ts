@@ -1,4 +1,4 @@
-import { IoSource, openStream } from '@wowserhq/io';
+import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import {
   BLP_COLOR_FORMAT,
   BLP_IMAGE_FORMAT,
@@ -76,6 +76,59 @@ class Blp {
     }
 
     stream.close();
+  }
+
+  save(source?: IoSource) {
+    const extended =
+      this.#colorFormat === BLP_COLOR_FORMAT.COLOR_PAL ? this.#palette : new Uint8Array(1024);
+
+    const mipSizes = new Array(MAX_MIPS).fill(0);
+    const mipOffsets = new Array(MAX_MIPS).fill(0);
+
+    const header = {
+      magic: this.#magic,
+      formatVersion: this.#formatVersion,
+      colorFormat: this.#colorFormat,
+      alphaSize: this.#alphaSize,
+      preferredFormat: this.#preferredFormat,
+      hasMips: this.#images.length > 1 ? 1 : 0,
+      width: this.#width,
+      height: this.#height,
+      mipSizes,
+      mipOffsets,
+      extended,
+    };
+
+    // Calculate mip offsets and sizes
+    let fileOffset = blpIo.header.getSize(header);
+    for (let i = 0; i < this.#images.length; i++) {
+      const mipSize = this.#images[i].byteLength;
+
+      mipOffsets[i] = fileOffset;
+      mipSizes[i] = mipSize;
+
+      fileOffset += mipSize;
+    }
+
+    // Open output
+    const buffer = source ? undefined : new Uint8Array(fileOffset);
+    const stream = source ? openStream(source, IoMode.Write) : openStream(buffer, IoMode.Write);
+
+    // Write header
+    blpIo.header.write(stream, header, {});
+
+    // Write mip images
+    for (const image of this.#images) {
+      stream.writeBytes(image);
+    }
+
+    // Close output
+    stream.close();
+
+    // Return buffer if not called with an output source
+    if (buffer) {
+      return buffer;
+    }
   }
 
   get magic() {
