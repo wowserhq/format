@@ -460,4 +460,84 @@ describe('Blp', () => {
       expect(savedData.subarray(1172)).toEqual(originalData.subarray(1172));
     });
   });
+
+  describe('setImage', () => {
+    describe('raw', () => {
+      test('should set image with given ARGB8888 source and mipmap generation disabled', () => {
+        const srcBlp = new Blp();
+        srcBlp.load('./fixture/raw.blp');
+        const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
+
+        const dstBlp = new Blp();
+        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
+        dstBlp.setImage(srcImage, false);
+        const dstImage = dstBlp.getImage(0);
+
+        expect(dstBlp.width).toBe(256);
+        expect(dstBlp.height).toBe(256);
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+
+        expect(dstImage.width).toBe(256);
+        expect(dstImage.height).toBe(256);
+        expect(dstImage.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
+      });
+
+      test('should set image with given ARGB8888 source and mipmap generation enabled', () => {
+        const srcBlp = new Blp();
+        srcBlp.load('./fixture/raw.blp');
+        const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
+
+        const dstBlp = new Blp();
+        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
+        dstBlp.setImage(srcImage, true);
+        const dstImage = dstBlp.getImage(1);
+
+        expect(dstBlp.width).toBe(256);
+        expect(dstBlp.height).toBe(256);
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+
+        expect(dstImage.width).toBe(128);
+        expect(dstImage.height).toBe(128);
+        expect(dstImage.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
+      });
+
+      test('should set image with given ABGR8888 source and mipmap generation disabled', () => {
+        const srcBlp = new Blp();
+        srcBlp.load('./fixture/raw.blp');
+        const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const dstBlp = new Blp();
+        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
+        dstBlp.setImage(srcImage, false);
+        const dstImage = dstBlp.getImage(0);
+
+        expect(dstBlp.width).toBe(256);
+        expect(dstBlp.height).toBe(256);
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+
+        expect(dstImage.width).toBe(256);
+        expect(dstImage.height).toBe(256);
+        expect(dstImage.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
+      });
+
+      test('should set image with given ABGR8888 source and mipmap generation enabled', () => {
+        const srcBlp = new Blp();
+        srcBlp.load('./fixture/raw.blp');
+        const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
+
+        const dstBlp = new Blp();
+        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
+        dstBlp.setImage(srcImage, true);
+        const dstImage = dstBlp.getImage(1);
+
+        expect(dstBlp.width).toBe(256);
+        expect(dstBlp.height).toBe(256);
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+
+        expect(dstImage.width).toBe(128);
+        expect(dstImage.height).toBe(128);
+        expect(dstImage.format).toBe(BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
+      });
+    });
+  });
 });
