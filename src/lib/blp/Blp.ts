@@ -48,6 +48,10 @@ class Blp {
     return this.#height;
   }
 
+  get mipLevelCount() {
+    return this.#images.length;
+  }
+
   load(source: IoSource) {
     const stream = openStream(source);
     const header = blpIo.header.read(stream);

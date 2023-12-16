@@ -472,9 +472,10 @@ describe('Blp', () => {
         dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, false);
         const dstImage = dstBlp.getImage(0);
 
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
         expect(dstBlp.width).toBe(256);
         expect(dstBlp.height).toBe(256);
-        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+        expect(dstBlp.mipLevelCount).toBe(1);
 
         expect(dstImage.width).toBe(256);
         expect(dstImage.height).toBe(256);
@@ -490,9 +491,10 @@ describe('Blp', () => {
         dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, true);
         const dstImage = dstBlp.getImage(1);
 
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
         expect(dstBlp.width).toBe(256);
         expect(dstBlp.height).toBe(256);
-        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+        expect(dstBlp.mipLevelCount).toBe(9);
 
         expect(dstImage.width).toBe(128);
         expect(dstImage.height).toBe(128);
@@ -508,9 +510,10 @@ describe('Blp', () => {
         dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, false);
         const dstImage = dstBlp.getImage(0);
 
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
         expect(dstBlp.width).toBe(256);
         expect(dstBlp.height).toBe(256);
-        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+        expect(dstBlp.mipLevelCount).toBe(1);
 
         expect(dstImage.width).toBe(256);
         expect(dstImage.height).toBe(256);
@@ -526,9 +529,10 @@ describe('Blp', () => {
         dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, true);
         const dstImage = dstBlp.getImage(1);
 
+        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
         expect(dstBlp.width).toBe(256);
         expect(dstBlp.height).toBe(256);
-        expect(dstBlp.colorFormat).toBe(BLP_COLOR_FORMAT.COLOR_RAW);
+        expect(dstBlp.mipLevelCount).toBe(9);
 
         expect(dstImage.width).toBe(128);
         expect(dstImage.height).toBe(128);
