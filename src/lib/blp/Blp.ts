@@ -4,7 +4,7 @@ import {
   BLP_IMAGE_FORMAT,
   BLP_MAGIC,
   BLP_PIXEL_FORMAT,
-  MAX_MIPS,
+  MAX_MIP_LEVELS,
 } from './const.js';
 import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
 import { palToAbgr8888 } from './pal.js';
@@ -63,7 +63,7 @@ class Blp {
     const mipOffsets = header.mipOffsets;
     const mipSizes = header.mipSizes;
 
-    for (let level = 0; level < MAX_MIPS; level++) {
+    for (let level = 0; level < MAX_MIP_LEVELS; level++) {
       const offset = mipOffsets[level];
       const size = mipSizes[level];
 
@@ -82,8 +82,8 @@ class Blp {
     const extended =
       this.#colorFormat === BLP_COLOR_FORMAT.COLOR_PAL ? this.#palette : new Uint8Array(1024);
 
-    const mipSizes = new Array(MAX_MIPS).fill(0);
-    const mipOffsets = new Array(MAX_MIPS).fill(0);
+    const mipSizes = new Array(MAX_MIP_LEVELS).fill(0);
+    const mipOffsets = new Array(MAX_MIP_LEVELS).fill(0);
 
     const header = {
       magic: this.#magic,

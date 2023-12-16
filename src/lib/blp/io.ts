@@ -1,5 +1,5 @@
 import * as io from '@wowserhq/io';
-import { MAX_MIPS } from './const.js';
+import { MAX_MIP_LEVELS } from './const.js';
 import { IoType } from '@wowserhq/io';
 
 const header: IoType = io.struct({
@@ -11,8 +11,8 @@ const header: IoType = io.struct({
   hasMips: io.uint8,
   width: io.uint32le,
   height: io.uint32le,
-  mipOffsets: io.array(io.uint32le, { size: MAX_MIPS }),
-  mipSizes: io.array(io.uint32le, { size: MAX_MIPS }),
+  mipOffsets: io.array(io.uint32le, { size: MAX_MIP_LEVELS }),
+  mipSizes: io.array(io.uint32le, { size: MAX_MIP_LEVELS }),
   extended: io.array(io.uint8, { size: 1024 }),
 });
 
