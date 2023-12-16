@@ -52,7 +52,7 @@ class Blp {
     return this.#images.length;
   }
 
-  load(source: IoSource) {
+  load(source: IoSource): Blp {
     const stream = openStream(source);
     const header = blpIo.header.read(stream);
 
@@ -104,6 +104,8 @@ class Blp {
     }
 
     stream.close();
+
+    return this;
   }
 
   save(source?: IoSource) {

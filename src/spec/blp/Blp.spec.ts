@@ -6,8 +6,7 @@ describe('Blp', () => {
   describe('load', () => {
     describe('pala0', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala0.blp');
+        const blp = new Blp().load('./fixture/pala0.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -20,8 +19,7 @@ describe('Blp', () => {
 
     describe('pala1', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala1.blp');
+        const blp = new Blp().load('./fixture/pala1.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -34,8 +32,7 @@ describe('Blp', () => {
 
     describe('pala4', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala4.blp');
+        const blp = new Blp().load('./fixture/pala4.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -48,8 +45,7 @@ describe('Blp', () => {
 
     describe('pala8', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala8.blp');
+        const blp = new Blp().load('./fixture/pala8.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -62,8 +58,7 @@ describe('Blp', () => {
 
     describe('dxt1a', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt1a.blp');
+        const blp = new Blp().load('./fixture/dxt1a.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -76,8 +71,7 @@ describe('Blp', () => {
 
     describe('dxt3', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt3.blp');
+        const blp = new Blp().load('./fixture/dxt3.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -90,8 +84,7 @@ describe('Blp', () => {
 
     describe('dxt5', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt5.blp');
+        const blp = new Blp().load('./fixture/dxt5.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -104,8 +97,7 @@ describe('Blp', () => {
 
     describe('raw', () => {
       test('should load blp from valid file', () => {
-        const blp = new Blp();
-        blp.load('./fixture/raw.blp');
+        const blp = new Blp().load('./fixture/raw.blp');
 
         expect(blp.magic).toBe('BLP2');
         expect(blp.formatVersion).toBe(1);
@@ -120,8 +112,7 @@ describe('Blp', () => {
   describe('getImage', () => {
     describe('pala0', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala0.blp');
+        const blp = new Blp().load('./fixture/pala0.blp');
 
         const image = blp.getImage();
 
@@ -132,8 +123,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala0.blp');
+        const blp = new Blp().load('./fixture/pala0.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -155,8 +145,7 @@ describe('Blp', () => {
 
     describe('pala1', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala1.blp');
+        const blp = new Blp().load('./fixture/pala1.blp');
 
         const image = blp.getImage();
 
@@ -167,8 +156,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala1.blp');
+        const blp = new Blp().load('./fixture/pala1.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -190,8 +178,7 @@ describe('Blp', () => {
 
     describe('pala4', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala4.blp');
+        const blp = new Blp().load('./fixture/pala4.blp');
 
         const image = blp.getImage();
 
@@ -202,8 +189,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala4.blp');
+        const blp = new Blp().load('./fixture/pala4.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -225,8 +211,7 @@ describe('Blp', () => {
 
     describe('pala8', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala8.blp');
+        const blp = new Blp().load('./fixture/pala8.blp');
 
         const image = blp.getImage();
 
@@ -237,8 +222,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/pala8.blp');
+        const blp = new Blp().load('./fixture/pala8.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -260,8 +244,7 @@ describe('Blp', () => {
 
     describe('dxt1a', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt1a.blp');
+        const blp = new Blp().load('./fixture/dxt1a.blp');
 
         const image = blp.getImage();
 
@@ -272,8 +255,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt1a.blp');
+        const blp = new Blp().load('./fixture/dxt1a.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -295,8 +277,7 @@ describe('Blp', () => {
 
     describe('dxt3', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt3.blp');
+        const blp = new Blp().load('./fixture/dxt3.blp');
 
         const image = blp.getImage();
 
@@ -307,8 +288,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt3.blp');
+        const blp = new Blp().load('./fixture/dxt3.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -330,8 +310,7 @@ describe('Blp', () => {
 
     describe('dxt5', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt5.blp');
+        const blp = new Blp().load('./fixture/dxt5.blp');
 
         const image = blp.getImage();
 
@@ -342,8 +321,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 1 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/dxt5.blp');
+        const blp = new Blp().load('./fixture/dxt5.blp');
 
         const image = blp.getImage(1, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -365,8 +343,7 @@ describe('Blp', () => {
 
     describe('raw', () => {
       test('should return image for default level and format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/raw.blp');
+        const blp = new Blp().load('./fixture/raw.blp');
 
         const image = blp.getImage();
 
@@ -377,8 +354,7 @@ describe('Blp', () => {
       });
 
       test('should return image for level 0 and ABGR8888 format', () => {
-        const blp = new Blp();
-        blp.load('./fixture/raw.blp');
+        const blp = new Blp().load('./fixture/raw.blp');
 
         const image = blp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
@@ -416,8 +392,7 @@ describe('Blp', () => {
     });
 
     test('should save raw blp', () => {
-      const blp = new Blp();
-      blp.load('./fixture/raw.blp');
+      const blp = new Blp().load('./fixture/raw.blp');
       const savedData = blp.save();
 
       const originalBuffer = fs.readFileSync('./fixture/raw.blp');
@@ -431,8 +406,7 @@ describe('Blp', () => {
     });
 
     test('should save dxt blp', () => {
-      const blp = new Blp();
-      blp.load('./fixture/dxt3.blp');
+      const blp = new Blp().load('./fixture/dxt3.blp');
       const savedData = blp.save();
 
       const originalBuffer = fs.readFileSync('./fixture/dxt3.blp');
@@ -446,8 +420,7 @@ describe('Blp', () => {
     });
 
     test('should save pal blp', () => {
-      const blp = new Blp();
-      blp.load('./fixture/pala4.blp');
+      const blp = new Blp().load('./fixture/pala4.blp');
       const savedData = blp.save();
 
       const originalBuffer = fs.readFileSync('./fixture/pala4.blp');
@@ -464,8 +437,7 @@ describe('Blp', () => {
   describe('setImage', () => {
     describe('raw', () => {
       test('should set image with given ARGB8888 source and mipmap generation disabled', () => {
-        const srcBlp = new Blp();
-        srcBlp.load('./fixture/raw.blp');
+        const srcBlp = new Blp().load('./fixture/raw.blp');
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
 
         const dstBlp = new Blp();
@@ -483,8 +455,7 @@ describe('Blp', () => {
       });
 
       test('should set image with given ARGB8888 source and mipmap generation enabled', () => {
-        const srcBlp = new Blp();
-        srcBlp.load('./fixture/raw.blp');
+        const srcBlp = new Blp().load('./fixture/raw.blp');
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
 
         const dstBlp = new Blp();
@@ -502,8 +473,7 @@ describe('Blp', () => {
       });
 
       test('should set image with given ABGR8888 source and mipmap generation disabled', () => {
-        const srcBlp = new Blp();
-        srcBlp.load('./fixture/raw.blp');
+        const srcBlp = new Blp().load('./fixture/raw.blp');
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         const dstBlp = new Blp();
@@ -521,8 +491,7 @@ describe('Blp', () => {
       });
 
       test('should set image with given ABGR8888 source and mipmap generation enabled', () => {
-        const srcBlp = new Blp();
-        srcBlp.load('./fixture/raw.blp');
+        const srcBlp = new Blp().load('./fixture/raw.blp');
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         const dstBlp = new Blp();

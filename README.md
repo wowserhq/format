@@ -47,8 +47,7 @@ const loadBlp = async (url) => {
 
   const data = await response.arrayBuffer();
 
-  const blp = new Blp();
-  blp.load(new Uint8Array(data));
+  const blp = new Blp().load(new Uint8Array(data));
 
   // <canvas> elements use image data stored in [r, g, b, a] byte order. Per standard naming
   // conventions, the BLP_IMAGE_FORMAT enum references formats in highest-to-lowest order on
