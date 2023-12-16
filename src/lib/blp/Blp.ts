@@ -8,9 +8,9 @@ import {
 } from './const.js';
 import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
 import { palToAbgr8888 } from './pal.js';
-import { rawArgb8888ToAbgr8888 } from './raw.js';
+import { rawAbgr8888ToArgb8888, rawArgb8888ToAbgr8888 } from './raw.js';
 import * as blpIo from './io.js';
-import { getSizeAtMipLevel } from './util.js';
+import { calcLevelCount, getSizeAtMipLevel, resizeBilinear } from './util.js';
 import BlpImage from './BlpImage.js';
 
 class Blp {
@@ -161,8 +161,48 @@ class Blp {
   }
 
   setImage(image: BlpImage, generateMips = false) {
-    // TODO
-    throw new Error('Unimplemented');
+    switch (this.#colorFormat) {
+      case BLP_COLOR_FORMAT.COLOR_RAW:
+        return this.#setRawImage(image, generateMips);
+
+      default:
+        throw new Error(`Unsupported color format: ${this.#colorFormat}`);
+    }
+  }
+
+  #setRawImage(image: BlpImage, generateMips: boolean) {
+    const levelCount = generateMips ? calcLevelCount(image.width, image.height) : 1;
+
+    let imageData: Uint8Array;
+    switch (image.format) {
+      case BLP_IMAGE_FORMAT.IMAGE_ARGB8888:
+        imageData = image.data;
+        break;
+
+      case BLP_IMAGE_FORMAT.IMAGE_ABGR8888:
+        imageData = rawAbgr8888ToArgb8888(image.width, image.height, image.data);
+        break;
+
+      default:
+        throw new Error(`Unsupported image format: ${image.format}`);
+    }
+
+    this.#preferredFormat = BLP_PIXEL_FORMAT.PIXEL_ARGB8888;
+    this.#alphaSize = 8;
+    this.#width = image.width;
+    this.#height = image.height;
+
+    const images = [];
+
+    for (let level = 0; level < levelCount; level++) {
+      const mipWidth = getSizeAtMipLevel(image.width, level);
+      const mipHeight = getSizeAtMipLevel(image.height, level);
+      const mipImage = resizeBilinear(imageData, image.width, image.height, mipWidth, mipHeight);
+
+      images.push(mipImage);
+    }
+
+    this.#images = images;
   }
 
   getImage(level: number = 0, outputFormat: BLP_IMAGE_FORMAT = BLP_IMAGE_FORMAT.IMAGE_UNSPECIFIED) {

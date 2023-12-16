@@ -13,4 +13,6 @@ const rawArgb8888ToAbgr8888 = (width: number, height: number, input: Uint8Array)
   return output;
 };
 
-export { rawArgb8888ToAbgr8888 };
+const rawAbgr8888ToArgb8888 = rawArgb8888ToAbgr8888;
+
+export { rawArgb8888ToAbgr8888, rawAbgr8888ToArgb8888 };
