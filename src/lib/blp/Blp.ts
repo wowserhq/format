@@ -24,6 +24,30 @@ class Blp {
   #images: Uint8Array[] = [];
   #palette: Uint8Array;
 
+  get magic() {
+    return this.#magic;
+  }
+
+  get formatVersion() {
+    return this.#formatVersion;
+  }
+
+  get colorFormat() {
+    return this.#colorFormat;
+  }
+
+  get alphaSize() {
+    return this.#alphaSize;
+  }
+
+  get width() {
+    return this.#width;
+  }
+
+  get height() {
+    return this.#height;
+  }
+
   load(source: IoSource) {
     const stream = openStream(source);
     const header = blpIo.header.read(stream);
@@ -129,30 +153,6 @@ class Blp {
     if (buffer) {
       return buffer;
     }
-  }
-
-  get magic() {
-    return this.#magic;
-  }
-
-  get formatVersion() {
-    return this.#formatVersion;
-  }
-
-  get colorFormat() {
-    return this.#colorFormat;
-  }
-
-  get alphaSize() {
-    return this.#alphaSize;
-  }
-
-  get width() {
-    return this.#width;
-  }
-
-  get height() {
-    return this.#height;
   }
 
   setImage(image: BlpImage, colorFormat: BLP_COLOR_FORMAT, generateMips = false) {
