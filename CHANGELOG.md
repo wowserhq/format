@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/wowserhq/format/compare/v0.6.0...v0.7.0) (2023-12-16)
+
+
+### Features
+
+* **blp:** add support for setting images with raw color format ([#26](https://github.com/wowserhq/format/issues/26)) ([78f9e5f](https://github.com/wowserhq/format/commit/78f9e5fb38f240c0b7562a52e59f16a1000da47f))
+* **blp:** add supporting for saving BLPs ([#23](https://github.com/wowserhq/format/issues/23)) ([a196167](https://github.com/wowserhq/format/commit/a1961675a4d08aa4462fdebaf0038260356e3dc5))
+
 ## [0.6.0](https://github.com/wowserhq/format/compare/v0.5.0...v0.6.0) (2023-12-10)
 
 
