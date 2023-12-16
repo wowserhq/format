@@ -15,24 +15,29 @@ To install Wowser Format:
 npm install @wowserhq/format
 ```
 
-Wowser Format has a single dependency: it uses `@wowserhq/io` to handle file IO (reads and writes).
+Wowser Format has a single dependency: it uses `@wowserhq/io` to handle format IO like reads and
+writes. There is no use of native modules. All format classes work with modern browsers and Node.js.
 
-Format handling in Wowser Format is split up into major format types:
-- **BLP**: Blizzard's standard image format for World of Warcraft
+Format classes in Wowser Format align with major format types used in World of Warcraft:
 
-Other format types will be landing in Wowser Format in the near future.
+| Format | Format Classes    | Description                                                     |
+|--------|-------------------|-----------------------------------------------------------------|
+| BLP    | `Blp`, `BlpImage` | Standard image format for textures, icons, and other image data |
+
+Format classes aligned with other major format types will be landing in Wowser Format in the near
+future.
 
 ## BLP
 
 Wowser Format supports loading and converting image data contained in BLP files, and saving new
-BLP files. Specific BLP encoding support is as follows:
+BLP files. Specific BLP color format support is as follows:
 
-| BLP Encoding | Loading / converting | Saving |
-|--------------|----------------------|--------|
-| Palette      | ✔                    | ✗      |
-| DXT          | ✔                    | ✗      |
-| Raw          | ✔                    | ✔      |
-| JPEG         | ✗                    | ✗      |
+| BLP Color Format | Loading / Converting | Saving |
+|------------------|----------------------|--------|
+| Palette          | ✔                    | ✗      |
+| DXT              | ✔                    | ✗      |
+| Raw              | ✔                    | ✔      |
+| JPEG             | ✗                    | ✗      |
 
 ### Rendering a BLP in a `<canvas>` element
 
