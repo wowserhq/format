@@ -93,5 +93,5 @@ blp.save('./new.blp');
 
 ## License
 
-Wowser Format is copyright © Wowser Contributors. It is licensed under the **MIT** license. See
-`LICENSE` for more information.
+Except where otherwise noted, Wowser Format is copyright © 2023 Wowser Contributors. It is licensed
+under the **MIT license**. See `LICENSE` for more information.
