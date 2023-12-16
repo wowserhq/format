@@ -469,8 +469,7 @@ describe('Blp', () => {
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
 
         const dstBlp = new Blp();
-        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
-        dstBlp.setImage(srcImage, false);
+        dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, false);
         const dstImage = dstBlp.getImage(0);
 
         expect(dstBlp.width).toBe(256);
@@ -488,8 +487,7 @@ describe('Blp', () => {
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ARGB8888);
 
         const dstBlp = new Blp();
-        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
-        dstBlp.setImage(srcImage, true);
+        dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, true);
         const dstImage = dstBlp.getImage(1);
 
         expect(dstBlp.width).toBe(256);
@@ -507,8 +505,7 @@ describe('Blp', () => {
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         const dstBlp = new Blp();
-        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
-        dstBlp.setImage(srcImage, false);
+        dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, false);
         const dstImage = dstBlp.getImage(0);
 
         expect(dstBlp.width).toBe(256);
@@ -526,8 +523,7 @@ describe('Blp', () => {
         const srcImage = srcBlp.getImage(0, BLP_IMAGE_FORMAT.IMAGE_ABGR8888);
 
         const dstBlp = new Blp();
-        dstBlp.colorFormat = BLP_COLOR_FORMAT.COLOR_RAW;
-        dstBlp.setImage(srcImage, true);
+        dstBlp.setImage(srcImage, BLP_COLOR_FORMAT.COLOR_RAW, true);
         const dstImage = dstBlp.getImage(1);
 
         expect(dstBlp.width).toBe(256);

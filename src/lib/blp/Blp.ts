@@ -143,11 +143,6 @@ class Blp {
     return this.#colorFormat;
   }
 
-  set colorFormat(colorFormat: BLP_COLOR_FORMAT) {
-    this.#reset();
-    this.#colorFormat = colorFormat;
-  }
-
   get alphaSize() {
     return this.#alphaSize;
   }
@@ -160,7 +155,13 @@ class Blp {
     return this.#height;
   }
 
-  setImage(image: BlpImage, generateMips = false) {
+  setImage(image: BlpImage, colorFormat: BLP_COLOR_FORMAT, generateMips = false) {
+    this.#resetImage();
+
+    this.#colorFormat = colorFormat;
+    this.#width = image.width;
+    this.#height = image.height;
+
     switch (this.#colorFormat) {
       case BLP_COLOR_FORMAT.COLOR_RAW:
         return this.#setRawImage(image, generateMips);
@@ -189,8 +190,6 @@ class Blp {
 
     this.#preferredFormat = BLP_PIXEL_FORMAT.PIXEL_ARGB8888;
     this.#alphaSize = 8;
-    this.#width = image.width;
-    this.#height = image.height;
 
     const images = [];
 
@@ -380,7 +379,7 @@ class Blp {
     }
   }
 
-  #reset() {
+  #resetImage() {
     this.#colorFormat = BLP_COLOR_FORMAT.COLOR_DXT;
     this.#preferredFormat = BLP_PIXEL_FORMAT.PIXEL_DXT5;
     this.#alphaSize = 0;
