@@ -10,7 +10,7 @@ import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
 import { palToAbgr8888 } from './pal.js';
 import { rawAbgr8888ToArgb8888, rawArgb8888ToAbgr8888 } from './raw.js';
 import * as blpIo from './io.js';
-import { calcLevelCount, getSizeAtMipLevel, resizeBilinear } from './util.js';
+import { calcMipLevelCount, getSizeAtMipLevel, resizeBilinear } from './util.js';
 import BlpImage from './BlpImage.js';
 
 class Blp {
@@ -171,7 +171,7 @@ class Blp {
   }
 
   #setRawImage(image: BlpImage, generateMips: boolean) {
-    const levelCount = generateMips ? calcLevelCount(image.width, image.height) : 1;
+    const levelCount = generateMips ? calcMipLevelCount(image.width, image.height) : 1;
 
     let imageData: Uint8Array;
     switch (image.format) {

@@ -1,4 +1,4 @@
-const calcLevelCount = (width: number, height: number) => {
+const calcMipLevelCount = (width: number, height: number) => {
   let count = 1;
 
   let w = width === height * 6 ? width / 6 : width;
@@ -63,4 +63,4 @@ const resizeBilinear = (
   return newData;
 };
 
-export { calcLevelCount, getSizeAtMipLevel, resizeBilinear };
+export { calcMipLevelCount, getSizeAtMipLevel, resizeBilinear };

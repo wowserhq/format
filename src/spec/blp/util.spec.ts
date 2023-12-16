@@ -1,22 +1,22 @@
-import { calcLevelCount, getSizeAtMipLevel } from '../../lib/blp/util.js';
+import { calcMipLevelCount, getSizeAtMipLevel } from '../../lib/blp/util.js';
 import { describe, expect, test } from 'vitest';
 
 describe('util', () => {
-  describe('calcLevelCount', () => {
-    test('should return expected level count for 512x512 dimensions', () => {
-      expect(calcLevelCount(512, 512)).toBe(10);
+  describe('calcMipLevelCount', () => {
+    test('should return expected mip level count for 512x512 dimensions', () => {
+      expect(calcMipLevelCount(512, 512)).toBe(10);
     });
 
-    test('should return expected level count for 16x16 dimensions', () => {
-      expect(calcLevelCount(16, 16)).toBe(5);
+    test('should return expected mip level count for 16x16 dimensions', () => {
+      expect(calcMipLevelCount(16, 16)).toBe(5);
     });
 
-    test('should return expected level count for 1x1 dimensions', () => {
-      expect(calcLevelCount(1, 1)).toBe(1);
+    test('should return expected mip level count for 1x1 dimensions', () => {
+      expect(calcMipLevelCount(1, 1)).toBe(1);
     });
 
-    test('should return expected level count for 128x64 dimensions', () => {
-      expect(calcLevelCount(128, 64)).toBe(8);
+    test('should return expected mip level count for 128x64 dimensions', () => {
+      expect(calcMipLevelCount(128, 64)).toBe(8);
     });
   });
 
