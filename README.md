@@ -59,6 +59,27 @@ const context = canvas.getContext('2d');
 context.putImageData(imageData, 0, 0);
 ```
 
+#### Creating a new BLP
+
+```js
+import { Blp, BlpImage, BLP_COLOR_FORMAT, BLP_IMAGE_FORMAT } from '@wowserhq/format';
+
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
+const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+const blpImage = new BlpImage(
+  imageData.width,
+  imageData.height,
+  new Uint8Array(imageData.data),
+  BLP_IMAGE_FORMAT.IMAGE_ABGR8888
+);
+
+const blp = new Blp();
+blp.setImage(blpImage, BLP_COLOR_FORMAT.COLOR_RAW, true);
+blp.save('./new.blp');
+```
+
 ## License
 
 Wowser Format is copyright © Wowser Contributors. It is licensed under the **MIT** license. See
