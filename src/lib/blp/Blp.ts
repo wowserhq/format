@@ -237,6 +237,25 @@ class Blp {
     }
   }
 
+  getImages(
+    startLevel: number = 0,
+    outputFormat: BLP_IMAGE_FORMAT = BLP_IMAGE_FORMAT.IMAGE_UNSPECIFIED,
+  ): BlpImage[] {
+    if (startLevel > this.#images.length - 1) {
+      throw new Error(
+        `Requested start level out of range: ${startLevel} > ${this.#images.length - 1}`,
+      );
+    }
+
+    const images: BlpImage[] = [];
+
+    for (let level = startLevel; level < this.#images.length; level++) {
+      images.push(this.getImage(level, outputFormat));
+    }
+
+    return images;
+  }
+
   /**
    * For a given mip level, return a BlpImage containing the unconverted image data from the Blp. If the Blp uses a
    * palette, the image data will be converted to IMAGE_FORMAT.IMAGE_ABGR8888 before being returned.
