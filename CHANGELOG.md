@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.8.0](https://github.com/wowserhq/format/compare/v0.7.0...v0.8.0) (2023-12-26)
+
+
+### Features
+
+* **blp:** add helper to return all images from a BLP ([227b0da](https://github.com/wowserhq/format/commit/227b0dac8f6f67a0e2b9aa114f574a92e5e88476))
+* **blp:** permit chaining load calls ([6becae8](https://github.com/wowserhq/format/commit/6becae88553cbee9ac53d9e2a36922c5b014d4a1))
+* **map:** add initial support for loading map formats ([#34](https://github.com/wowserhq/format/issues/34)) ([1e7b0d1](https://github.com/wowserhq/format/commit/1e7b0d17f0fd17d0bed3bb2ad72e8d7a3f32c8f0))
+
 ## [0.7.0](https://github.com/wowserhq/format/compare/v0.6.0...v0.7.0) (2023-12-16)
 
 
