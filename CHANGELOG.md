@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/wowserhq/format/compare/v0.8.0...v0.8.1) (2023-12-27)
+
+
+### Bug Fixes
+
+* add missing types export to package ([235f5fa](https://github.com/wowserhq/format/commit/235f5fad9f9a29c35fe8a031282361eee4ba793d))
+
 ## [0.8.0](https://github.com/wowserhq/format/compare/v0.7.0...v0.8.0) (2023-12-26)
 
 
