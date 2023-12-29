@@ -16,10 +16,12 @@ import { indexChunks, Tlv } from '../util.js';
 
 class Map {
   #version = 18;
-  #globalMapObj = null;
-  #areasPresent = new Uint8Array(MAP_AREA_COUNT);
-  #areas = [];
   #layerSplatDepth: 4 | 8 = 8;
+  #availableAreas = new Uint8Array(MAP_AREA_COUNT);
+
+  get availableAreas() {
+    return this.#availableAreas;
+  }
 
   get layerSplatDepth() {
     return this.#layerSplatDepth;
@@ -78,11 +80,11 @@ class Map {
 
     const areaInfoChunk = data.get('MAIN');
     if (areaInfoChunk) {
-      for (let areaIndex = 0; areaIndex < MAP_AREA_COUNT; areaIndex++) {
-        const areaInfo = areaInfoChunk[areaIndex];
+      for (let areaId = 0; areaId < MAP_AREA_COUNT; areaId++) {
+        const areaInfo = areaInfoChunk[areaId];
 
-        if (areaInfo.flags & AREA_INFO_FLAG.AREA_PRESENT) {
-          this.#areasPresent[areaIndex] = 1;
+        if (areaInfo.flags & AREA_INFO_FLAG.AREA_AVAILABLE) {
+          this.#availableAreas[areaId] = 1;
         }
       }
     }
