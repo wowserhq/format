@@ -1,6 +1,6 @@
 {
   "name": "@wowserhq/format",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Format classes to work with common data files used in World of Warcraft",
   "author": "Wowser Contributors",
   "repository": "github:wowserhq/format",
