@@ -72,7 +72,7 @@ class MapArea {
     const textures: string[] = areaData.get('MTEX');
     const alpha: Uint8Array = chunkData.get('MCAL');
 
-    for (const { textureId, properties, alphaOffset, effectId } of chunkData.get('MCLY')) {
+    for (const { textureId, properties, alphaOffset, effectId } of chunkData.get('MCLY') ?? []) {
       const texture = textures[textureId];
 
       // Normalize all MCAL splats into 8-bit depth splats
