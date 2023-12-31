@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/wowserhq/format/compare/v0.9.1...v0.9.2) (2023-12-31)
+
+
+### Bug Fixes
+
+* **map:** override length values appropriately when reading map chunks ([a292ed9](https://github.com/wowserhq/format/commit/a292ed93450f5de0da9b3e0fb87e2ee44e708f22))
+
 ## [0.9.1](https://github.com/wowserhq/format/compare/v0.9.0...v0.9.1) (2023-12-31)
 
 
