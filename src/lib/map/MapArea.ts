@@ -75,23 +75,30 @@ class MapArea {
     for (const { textureId, properties, alphaOffset, effectId } of chunkData.get('MCLY') ?? []) {
       const texture = textures[textureId];
 
-      // Normalize all MCAL splats into 8-bit depth splats
-      let splat: Uint8Array;
-      if (!alpha || alpha.length === 0) {
-        splat = null;
-      } else if (this.#layerSplatDepth === 4) {
-        const rawSplat = new Uint8Array(
-          alpha.buffer,
-          alpha.byteOffset + alphaOffset,
-          MAP_LAYER_SPLAT_SIZE / 2,
-        );
-        const needsFix = (chunkHeader.flags & MAP_CHUNK_FLAG.FIXED_LAYER_SPLAT) === 0;
-        splat = splat4To8(rawSplat, needsFix);
-      } else if (properties & MAP_LAYER_PROPERTY.SPLAT_COMPRESSED) {
-        const rawSplat = new Uint8Array(alpha.buffer, alpha.byteOffset, alphaOffset);
-        splat = splatCompressedTo8(rawSplat);
-      } else {
-        splat = new Uint8Array(alpha.buffer, alpha.byteOffset + alphaOffset, MAP_LAYER_SPLAT_SIZE);
+      let splat: Uint8Array = null;
+      const hasSplat = (properties & MAP_LAYER_PROPERTY.HAS_SPLAT) !== 0;
+
+      if (hasSplat && alpha && alpha.length > 0) {
+        // Normalize 4-bit and compressed splats into 8-bit depth splats
+
+        if (this.#layerSplatDepth === 4) {
+          const rawSplat = new Uint8Array(
+            alpha.buffer,
+            alpha.byteOffset + alphaOffset,
+            MAP_LAYER_SPLAT_SIZE / 2,
+          );
+          const needsFix = (chunkHeader.flags & MAP_CHUNK_FLAG.FIXED_LAYER_SPLAT) === 0;
+          splat = splat4To8(rawSplat, needsFix);
+        } else if (properties & MAP_LAYER_PROPERTY.SPLAT_COMPRESSED) {
+          const rawSplat = new Uint8Array(alpha.buffer, alpha.byteOffset + alphaOffset);
+          splat = splatCompressedTo8(rawSplat);
+        } else {
+          splat = new Uint8Array(
+            alpha.buffer,
+            alpha.byteOffset + alphaOffset,
+            MAP_LAYER_SPLAT_SIZE,
+          );
+        }
       }
 
       const layer = new MapLayer(texture, splat, effectId);
