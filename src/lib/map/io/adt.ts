@@ -10,6 +10,27 @@ const mapChunkInfo = io.struct({
   padding: io.uint32le,
 });
 
+const mapDoodadDef = io.struct({
+  nameId: io.uint32le,
+  uniqueId: io.uint32le,
+  position: io.typedArray(io.float32le, { size: 3 }),
+  rotation: io.typedArray(io.float32le, { size: 3 }),
+  scale: io.uint16le,
+  flags: io.uint16le,
+});
+
+const mapObjDef = io.struct({
+  nameId: io.uint32le,
+  uniqueId: io.uint32le,
+  position: io.typedArray(io.float32le, { size: 3 }),
+  rotation: io.typedArray(io.float32le, { size: 3 }),
+  extents: io.typedArray(io.float32le, { size: 6 }),
+  flags: io.uint16le,
+  doodadSet: io.uint16le,
+  nameSet: io.uint16le,
+  padding: io.uint16le,
+});
+
 const mcnk = new McnkIo();
 
 const mhdr = io.struct({
@@ -32,12 +53,24 @@ const mcin = io.array(mapChunkInfo);
 
 const mtex = io.array(io.string({ terminate: true }));
 
+const mmid = io.typedArray(io.uint32le);
+
+const mddf = io.array(mapDoodadDef);
+
+const mwid = io.typedArray(io.uint32le);
+
+const modf = io.array(mapObjDef);
+
 const adtChunks = {
   MHDR: mhdr,
   MVER: mver,
   MCIN: mcin,
   MTEX: mtex,
   MCNK: mcnk,
+  MMID: mmid,
+  MDDF: mddf,
+  MWID: mwid,
+  MODF: modf,
 };
 
 const adtChunk = io.tlv(

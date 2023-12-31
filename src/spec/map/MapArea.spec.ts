@@ -11,6 +11,8 @@ describe('MapArea', () => {
 
         expect(mapArea.version).toBe(18);
         expect(mapArea.chunks.length).toBe(16 * 16);
+        expect(mapArea.doodadDefs.length).toBe(381);
+        expect(mapArea.objDefs.length).toBe(19);
       });
     });
 
@@ -21,6 +23,8 @@ describe('MapArea', () => {
 
         expect(mapArea.version).toBe(18);
         expect(mapArea.chunks.length).toBe(16 * 16);
+        expect(mapArea.doodadDefs.length).toBe(0);
+        expect(mapArea.objDefs.length).toBe(0);
       });
     });
   });

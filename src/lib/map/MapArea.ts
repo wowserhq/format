@@ -1,8 +1,11 @@
 import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as adtIo from './io/adt.js';
+import * as commonIo from './io/common.js';
 import { indexChunks } from '../util.js';
 import MapChunk from './MapChunk.js';
 import MapLayer from './MapLayer.js';
+import MapDoodadDef from './MapDoodadDef.js';
+import MapObjDef from './MapObjDef.js';
 import {
   MAP_CHUNK_FLAG,
   MAP_LAYER_PROPERTY,
@@ -19,6 +22,8 @@ class MapArea {
   #version = 18;
   #chunks: MapChunk[] = [];
   #layerSplatDepth: 4 | 8;
+  #doodadDefs: MapDoodadDef[] = [];
+  #objDefs: MapObjDef[] = [];
 
   constructor(layerSplatDepth: 4 | 8 = 8) {
     this.#layerSplatDepth = layerSplatDepth;
@@ -30,6 +35,14 @@ class MapArea {
 
   get version() {
     return this.#version;
+  }
+
+  get doodadDefs() {
+    return this.#doodadDefs;
+  }
+
+  get objDefs() {
+    return this.#objDefs;
   }
 
   load(source: IoSource) {
@@ -49,8 +62,44 @@ class MapArea {
     }
 
     this.#loadChunks(data.get('MCNK'), data);
+    this.#loadDoodadDefs(data.get('MDDF'), data);
+    this.#loadObjDefs(data.get('MODF'), data);
 
     return this;
+  }
+
+  #loadDoodadDefs(defs: any[], areaData: Map<string, any>) {
+    if (!defs || defs.length === 0) {
+      return;
+    }
+
+    const nameOfs = areaData.get('MMID');
+    const names = openStream(areaData.get('MMDX'));
+
+    for (const def of defs) {
+      names.offset = nameOfs[def.nameId];
+      const name = commonIo.mapString.read(names);
+
+      this.#doodadDefs.push(
+        new MapDoodadDef(name, def.uniqueId, def.position, def.rotation, def.scale),
+      );
+    }
+  }
+
+  #loadObjDefs(defs: any[], areaData: Map<string, any>) {
+    if (!defs || defs.length === 0) {
+      return;
+    }
+
+    const nameOfs = areaData.get('MWID');
+    const names = openStream(areaData.get('MWMO'));
+
+    for (const def of defs) {
+      names.offset = nameOfs[def.nameId];
+      const name = commonIo.mapString.read(names);
+
+      this.#objDefs.push(new MapObjDef(name, def.uniqueId, def.position, def.rotation));
+    }
   }
 
   #loadChunks(chunks: any[], areaData: Map<string, any>) {
