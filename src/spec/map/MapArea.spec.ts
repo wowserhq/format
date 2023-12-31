@@ -13,5 +13,15 @@ describe('MapArea', () => {
         expect(mapArea.chunks.length).toBe(16 * 16);
       });
     });
+
+    describe('pvpzone', () => {
+      test('should load map area from valid file', () => {
+        const map = new Map().load('./fixture/map/pvpzone.wdt');
+        const mapArea = new MapArea(map.layerSplatDepth).load('./fixture/map/pvpzone3430.adt');
+
+        expect(mapArea.version).toBe(18);
+        expect(mapArea.chunks.length).toBe(16 * 16);
+      });
+    });
   });
 });

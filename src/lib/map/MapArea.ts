@@ -77,7 +77,7 @@ class MapArea {
 
       // Normalize all MCAL splats into 8-bit depth splats
       let splat: Uint8Array;
-      if (!alpha) {
+      if (!alpha || alpha.length === 0) {
         splat = null;
       } else if (this.#layerSplatDepth === 4) {
         const rawSplat = new Uint8Array(
