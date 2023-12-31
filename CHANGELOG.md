@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3](https://github.com/wowserhq/format/compare/v0.9.2...v0.9.3) (2023-12-31)
+
+
+### Bug Fixes
+
+* **map:** correct various splat issues when loading map chunks ([efc9d16](https://github.com/wowserhq/format/commit/efc9d163376bc02f5b2862c5da74e97491582050))
+
 ## [0.9.2](https://github.com/wowserhq/format/compare/v0.9.1...v0.9.2) (2023-12-31)
 
 
