@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/wowserhq/format/compare/v0.9.0...v0.9.1) (2023-12-31)
+
+
+### Bug Fixes
+
+* **map:** handle missing layers when loading map chunks ([c40777b](https://github.com/wowserhq/format/commit/c40777bc4769e7a95bcd5a5c7c4eea063ea53865))
+
 ## [0.9.0](https://github.com/wowserhq/format/compare/v0.8.1...v0.9.0) (2023-12-29)
 
 
