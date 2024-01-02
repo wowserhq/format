@@ -34,7 +34,7 @@
     "wowser"
   ],
   "dependencies": {
-    "@wowserhq/io": "^2.0.1"
+    "@wowserhq/io": "^2.0.2"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^18.4.3",
