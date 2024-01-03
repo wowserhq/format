@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.10.0](https://github.com/wowserhq/format/compare/v0.9.3...v0.10.0) (2024-01-03)
+
+
+### Features
+
+* **map:** add map-aligned position and rotation to doodad defs ([ec7e690](https://github.com/wowserhq/format/commit/ec7e69096019fd2136443bcb6f368edc91fe3bfc))
+* **map:** load doodad defs and obj defs when loading area ([05856f2](https://github.com/wowserhq/format/commit/05856f2fbb2ff28149b9ca3dc19be66313337301))
+* **model:** add support for reading m2 models ([8c4ade3](https://github.com/wowserhq/format/commit/8c4ade3518f96c107b207fee19d0a948570dc537))
+
+
+### Bug Fixes
+
+* **blp:** handle unusually sized mip data at very small sizes ([5d83376](https://github.com/wowserhq/format/commit/5d833762e5fe70e4a29cdc0efdb78c7e7724837a))
+
 ## [0.9.3](https://github.com/wowserhq/format/compare/v0.9.2...v0.9.3) (2023-12-31)
 
 
