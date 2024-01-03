@@ -32,7 +32,7 @@ class MapDoodadDef {
     this.#mapRotation = new Float32Array(3);
     this.#mapRotation[0] = rotation[2];
     this.#mapRotation[1] = rotation[0];
-    this.#mapRotation[2] = rotation[1];
+    this.#mapRotation[2] = rotation[1] - 180;
   }
 
   get name() {
