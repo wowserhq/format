@@ -1,0 +1,146 @@
+import { IoMode, IoSource, openStream } from '@wowserhq/io';
+import * as m2Io from './io/m2.js';
+import { M2_MODEL_FLAG } from './const.js';
+import M2Texture, { M2_TEXTURE_COMBINER, M2_TEXTURE_COORD } from './M2Texture.js';
+import M2Material from './M2Material.js';
+import M2TextureWeight from './M2TextureWeight.js';
+import M2TextureTransform from './M2TextureTransform.js';
+import { m2typedArray } from './io/common.js';
+import * as io from '@wowserhq/io';
+
+class M2Model {
+  #name: string;
+  #flags: number;
+  #vertices: ArrayBuffer;
+
+  #textures: M2Texture[] = [];
+  #textureCombos: number[] = [];
+  #textureCoordCombos: M2_TEXTURE_COORD[] = [];
+  #textureWeights: M2TextureWeight[] = [];
+  #textureWeightCombos: number[] = [];
+  #textureTransforms: M2TextureTransform[] = [];
+  #textureTransformCombos: number[] = [];
+  #textureCombinerCombos: M2_TEXTURE_COMBINER[] = [];
+
+  #materials: M2Material[] = [];
+  #skinProfileCount: number;
+
+  get flags() {
+    return this.#flags;
+  }
+
+  get materials() {
+    return this.#materials;
+  }
+
+  get name() {
+    return this.#name;
+  }
+
+  get textures() {
+    return this.#textures;
+  }
+
+  get textureCombos() {
+    return this.#textureCombos;
+  }
+
+  get textureCombinerCombos() {
+    return this.#textureCombinerCombos;
+  }
+
+  get textureCoordCombos() {
+    return this.#textureCoordCombos;
+  }
+
+  get textureTransforms() {
+    return this.#textureTransforms;
+  }
+
+  get textureTransformCombos() {
+    return this.#textureTransformCombos;
+  }
+
+  get textureWeights() {
+    return this.#textureWeights;
+  }
+
+  get textureWeightCombos() {
+    return this.#textureWeightCombos;
+  }
+
+  get skinProfileCount() {
+    return this.#skinProfileCount;
+  }
+
+  get vertices() {
+    return this.#vertices;
+  }
+
+  load(source: IoSource) {
+    const stream = openStream(source, IoMode.Read);
+
+    // Base data
+    const data = m2Io.m2.read(stream);
+
+    // Optional data
+    if (data.flags & M2_MODEL_FLAG.USE_COMBINER_COMBOS) {
+      this.#textureCombinerCombos = m2typedArray(io.uint16le).read(stream);
+    }
+
+    stream.close();
+
+    this.#name = data.name;
+    this.#flags = data.flags;
+    this.#skinProfileCount = data.skinProfileCount;
+    this.#vertices = data.vertices.buffer;
+
+    this.#textureCombos = data.textureCombos;
+    this.#textureCoordCombos = data.textureCoordCombos;
+    this.#textureWeightCombos = data.textureWeightCombos;
+    this.#textureTransformCombos = data.textureTransformCombos;
+
+    this.#loadTextures(data);
+    this.#loadTextureTransforms(data);
+    this.#loadTextureWeights(data);
+
+    this.#loadMaterials(data);
+
+    return this;
+  }
+
+  #loadMaterials(data: any) {
+    for (const materialData of data.materials) {
+      this.#materials.push(new M2Material(materialData.flags, materialData.blendMode));
+    }
+  }
+
+  #loadTextures(data: any) {
+    for (const textureData of data.textures) {
+      this.#textures.push(
+        new M2Texture(textureData.component, textureData.flags, textureData.filename),
+      );
+    }
+  }
+
+  #loadTextureTransforms(data: any) {
+    for (const textureTransformData of data.textureTransforms) {
+      this.#textureTransforms.push(
+        new M2TextureTransform(
+          textureTransformData.translationTrack,
+          textureTransformData.rotationTrack,
+          textureTransformData.scalingTrack,
+        ),
+      );
+    }
+  }
+
+  #loadTextureWeights(data: any) {
+    for (const textureWeightData of data.textureWeights) {
+      this.#textureWeights.push(new M2TextureWeight(textureWeightData.weightTrack));
+    }
+  }
+}
+
+export default M2Model;
+export { M2Model, M2_MODEL_FLAG };
