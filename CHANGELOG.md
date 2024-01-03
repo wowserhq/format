@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/wowserhq/format/compare/v0.10.0...v0.10.1) (2024-01-03)
+
+
+### Bug Fixes
+
+* **map:** correct doodad def z-axis rotation ([7c7b171](https://github.com/wowserhq/format/commit/7c7b171106a3b1246f5876f916e8305b65e33de4))
+
 ## [0.10.0](https://github.com/wowserhq/format/compare/v0.9.3...v0.10.0) (2024-01-03)
 
 
