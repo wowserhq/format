@@ -6,11 +6,18 @@ import {
   BLP_PIXEL_FORMAT,
   MAX_MIP_LEVELS,
 } from './const.js';
-import { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 } from './dxt.js';
+import {
+  dxt1ToAbgr8888,
+  dxt3ToAbgr8888,
+  dxt5ToAbgr8888,
+  getDxt1Size,
+  getDxt3Size,
+  getDxt5Size,
+} from './dxt.js';
 import { palToAbgr8888 } from './pal.js';
 import { rawAbgr8888ToArgb8888, rawArgb8888ToAbgr8888 } from './raw.js';
 import * as blpIo from './io.js';
-import { calcMipLevelCount, getSizeAtMipLevel, resizeBilinear } from './util.js';
+import { calcMipLevelCount, getResizedBytes, getSizeAtMipLevel, resizeBilinear } from './util.js';
 import BlpImage from './BlpImage.js';
 
 class Blp {
@@ -316,7 +323,12 @@ class Blp {
   #getDxt1Image(level: number, outputFormat: BLP_IMAGE_FORMAT): BlpImage {
     const width = getSizeAtMipLevel(this.#width, level);
     const height = getSizeAtMipLevel(this.#height, level);
-    const data = this.#images[level];
+
+    if (width === 0 || height === 0) {
+      return new BlpImage(width, height, new Uint8Array(0), outputFormat);
+    }
+
+    const data = getResizedBytes(this.#images[level], getDxt1Size(width, height));
 
     switch (outputFormat) {
       case BLP_IMAGE_FORMAT.IMAGE_DXT1:
@@ -333,7 +345,12 @@ class Blp {
   #getDxt3Image(level: number, outputFormat: BLP_IMAGE_FORMAT): BlpImage {
     const width = getSizeAtMipLevel(this.#width, level);
     const height = getSizeAtMipLevel(this.#height, level);
-    const data = this.#images[level];
+
+    if (width === 0 || height === 0) {
+      return new BlpImage(width, height, new Uint8Array(0), outputFormat);
+    }
+
+    const data = getResizedBytes(this.#images[level], getDxt3Size(width, height));
 
     switch (outputFormat) {
       case BLP_IMAGE_FORMAT.IMAGE_DXT3:
@@ -350,7 +367,12 @@ class Blp {
   #getDxt5Image(level: number, outputFormat: BLP_IMAGE_FORMAT) {
     const width = getSizeAtMipLevel(this.#width, level);
     const height = getSizeAtMipLevel(this.#height, level);
-    const data = this.#images[level];
+
+    if (width === 0 || height === 0) {
+      return new BlpImage(width, height, new Uint8Array(0), outputFormat);
+    }
+
+    const data = getResizedBytes(this.#images[level], getDxt5Size(width, height));
 
     switch (outputFormat) {
       case BLP_IMAGE_FORMAT.IMAGE_DXT5:

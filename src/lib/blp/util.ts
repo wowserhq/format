@@ -15,6 +15,22 @@ const calcMipLevelCount = (width: number, height: number) => {
 
 const getSizeAtMipLevel = (size: number, level: number) => (size / (1 << level)) | 0;
 
+const getResizedBytes = (bytes: Uint8Array, size: number) => {
+  if (bytes.byteLength === size) {
+    return bytes;
+  }
+
+  if (bytes.byteLength < size) {
+    const padded = new Uint8Array(size);
+    padded.set(bytes, 0);
+    return padded;
+  }
+
+  const trimmed = new Uint8Array(size);
+  trimmed.set(bytes.subarray(0, size), 0);
+  return trimmed;
+};
+
 const resizeBilinear = (
   data: Uint8Array,
   width: number,
@@ -63,4 +79,4 @@ const resizeBilinear = (
   return newData;
 };
 
-export { calcMipLevelCount, getSizeAtMipLevel, resizeBilinear };
+export { calcMipLevelCount, getSizeAtMipLevel, getResizedBytes, resizeBilinear };

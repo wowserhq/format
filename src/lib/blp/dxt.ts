@@ -262,6 +262,18 @@ const dxtToAbgr8888 = (
   return output8;
 };
 
+const getDxtSize = (width: number, height: number, blockSize: number) => {
+  const blockWidth = Math.ceil(width / DXT_BLOCK_WIDTH);
+  const blockHeight = Math.ceil(height / DXT_BLOCK_HEIGHT);
+  return blockWidth * blockHeight * blockSize;
+};
+
+const getDxt1Size = (width: number, height: number) => getDxtSize(width, height, DXT1_BLOCK_SIZE);
+
+const getDxt3Size = (width: number, height: number) => getDxtSize(width, height, DXT3_BLOCK_SIZE);
+
+const getDxt5Size = (width: number, height: number) => getDxtSize(width, height, DXT5_BLOCK_SIZE);
+
 const dxt1ToAbgr8888 = (width: number, height: number, input: Uint8Array) =>
   dxtToAbgr8888(width, height, input, DXT1_BLOCK_SIZE, dxt1DecompressBlock);
 
@@ -271,4 +283,4 @@ const dxt3ToAbgr8888 = (width: number, height: number, input: Uint8Array) =>
 const dxt5ToAbgr8888 = (width: number, height: number, input: Uint8Array) =>
   dxtToAbgr8888(width, height, input, DXT5_BLOCK_SIZE, dxt5DecompressBlock);
 
-export { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888 };
+export { dxt1ToAbgr8888, dxt3ToAbgr8888, dxt5ToAbgr8888, getDxt1Size, getDxt3Size, getDxt5Size };
