@@ -1,4 +1,5 @@
 import { IoMode, IoSource, openStream } from '@wowserhq/io';
+import { quat } from 'gl-matrix';
 import * as wdtIo from './io/wdt.js';
 import {
   AREA_INFO_FLAG,
@@ -54,6 +55,37 @@ class Map {
       chunkX,
       chunkY,
     };
+  }
+
+  /**
+   * Convert the given position vector in the doodad or map obj def coordinate system into a vector
+   * in the map coordinate system.
+   *
+   * @param defPosition - Vector in doodad / map obj def coordinate system
+   */
+  static getNormalizedDefPosition(defPosition: Float32Array) {
+    const normalized = new Float32Array(3);
+
+    normalized[0] = MAP_CORNER_X - defPosition[2];
+    normalized[1] = MAP_CORNER_Y - defPosition[0];
+    normalized[2] = defPosition[1];
+
+    return normalized;
+  }
+
+  /**
+   * Convert the given Euler angle in the doodad or map obj def coordinate system into a quaternion
+   * in the map coordinate system.
+   *
+   * @param defRotation - Euler angle in doodad / map obj def coordinate system
+   */
+  static getNormalizedDefRotation(defRotation: Float32Array) {
+    const normalized = quat.create();
+
+    // glMatrix defaults to the correct euler order (zyx) to convert to the map coordinate system
+    quat.fromEuler(normalized, defRotation[2], defRotation[0], defRotation[1] + 180);
+
+    return normalized as Float32Array;
   }
 
   load(source: IoSource) {

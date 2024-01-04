@@ -2,6 +2,7 @@ import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as adtIo from './io/adt.js';
 import * as commonIo from './io/common.js';
 import { indexChunks } from '../util.js';
+import Map from './Map.js';
 import MapChunk from './MapChunk.js';
 import MapLayer from './MapLayer.js';
 import MapDoodadDef from './MapDoodadDef.js';
@@ -68,7 +69,7 @@ class MapArea {
     return this;
   }
 
-  #loadDoodadDefs(defs: any[], areaData: Map<string, any>) {
+  #loadDoodadDefs(defs: any[], areaData: globalThis.Map<string, any>) {
     if (!defs || defs.length === 0) {
       return;
     }
@@ -80,13 +81,16 @@ class MapArea {
       names.offset = nameOfs[def.nameId];
       const name = commonIo.mapString.read(names);
 
+      const normalizedPosition = Map.getNormalizedDefPosition(def.position);
+      const normalizedRotation = Map.getNormalizedDefRotation(def.rotation);
+
       this.#doodadDefs.push(
-        new MapDoodadDef(name, def.uniqueId, def.position, def.rotation, def.scale),
+        new MapDoodadDef(name, def.uniqueId, normalizedPosition, normalizedRotation, def.scale),
       );
     }
   }
 
-  #loadObjDefs(defs: any[], areaData: Map<string, any>) {
+  #loadObjDefs(defs: any[], areaData: globalThis.Map<string, any>) {
     if (!defs || defs.length === 0) {
       return;
     }
@@ -98,17 +102,24 @@ class MapArea {
       names.offset = nameOfs[def.nameId];
       const name = commonIo.mapString.read(names);
 
-      this.#objDefs.push(new MapObjDef(name, def.uniqueId, def.position, def.rotation));
+      const normalizedPosition = Map.getNormalizedDefPosition(def.position);
+      const normalizedRotation = Map.getNormalizedDefRotation(def.rotation);
+
+      this.#objDefs.push(new MapObjDef(name, def.uniqueId, normalizedPosition, normalizedRotation));
     }
   }
 
-  #loadChunks(chunks: any[], areaData: Map<string, any>) {
+  #loadChunks(chunks: any[], areaData: globalThis.Map<string, any>) {
     for (const chunk of chunks) {
       this.#loadChunk(chunk.header, indexChunks(chunk.data), areaData);
     }
   }
 
-  #loadChunk(chunkHeader: any, chunkData: Map<string, any>, areaData: Map<string, any>) {
+  #loadChunk(
+    chunkHeader: any,
+    chunkData: globalThis.Map<string, any>,
+    areaData: globalThis.Map<string, any>,
+  ) {
     const chunk = new MapChunk(chunkHeader.position, chunkHeader.holes);
 
     // Vertices
