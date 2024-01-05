@@ -1,4 +1,5 @@
 import { IoMode, IoSource, openStream } from '@wowserhq/io';
+import * as io from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
 import { M2_MODEL_FLAG } from './const.js';
 import M2Texture, { M2_TEXTURE_COMBINER, M2_TEXTURE_COORD } from './M2Texture.js';
@@ -6,7 +7,6 @@ import M2Material from './M2Material.js';
 import M2TextureWeight from './M2TextureWeight.js';
 import M2TextureTransform from './M2TextureTransform.js';
 import { m2typedArray } from './io/common.js';
-import * as io from '@wowserhq/io';
 import M2Sequence from './M2Sequence.js';
 
 class M2Model {
@@ -27,9 +27,14 @@ class M2Model {
   #skinProfileCount: number;
 
   #sequences: M2Sequence[] = [];
+  #loops: Uint32Array;
 
   get flags() {
     return this.#flags;
+  }
+
+  get loops() {
+    return this.#loops;
   }
 
   get materials() {
@@ -42,6 +47,10 @@ class M2Model {
 
   get sequences() {
     return this.#sequences;
+  }
+
+  get skinProfileCount() {
+    return this.#skinProfileCount;
   }
 
   get textures() {
@@ -76,10 +85,6 @@ class M2Model {
     return this.#textureWeightCombos;
   }
 
-  get skinProfileCount() {
-    return this.#skinProfileCount;
-  }
-
   get vertices() {
     return this.#vertices;
   }
@@ -101,6 +106,7 @@ class M2Model {
     this.#flags = data.flags;
     this.#skinProfileCount = data.skinProfileCount;
     this.#vertices = data.vertices.buffer;
+    this.#loops = data.loops;
 
     this.#textureCombos = data.textureCombos;
     this.#textureCoordCombos = data.textureCoordCombos;
