@@ -7,6 +7,7 @@ import M2TextureWeight from './M2TextureWeight.js';
 import M2TextureTransform from './M2TextureTransform.js';
 import { m2typedArray } from './io/common.js';
 import * as io from '@wowserhq/io';
+import M2Sequence from './M2Sequence.js';
 
 class M2Model {
   #name: string;
@@ -25,6 +26,8 @@ class M2Model {
   #materials: M2Material[] = [];
   #skinProfileCount: number;
 
+  #sequences: M2Sequence[] = [];
+
   get flags() {
     return this.#flags;
   }
@@ -35,6 +38,10 @@ class M2Model {
 
   get name() {
     return this.#name;
+  }
+
+  get sequences() {
+    return this.#sequences;
   }
 
   get textures() {
@@ -106,12 +113,32 @@ class M2Model {
 
     this.#loadMaterials(data);
 
+    this.#loadSequences(data);
+
     return this;
   }
 
   #loadMaterials(data: any) {
     for (const materialData of data.materials) {
       this.#materials.push(new M2Material(materialData.flags, materialData.blendMode));
+    }
+  }
+
+  #loadSequences(data: any) {
+    for (const sequenceData of data.sequences) {
+      this.#sequences.push(
+        new M2Sequence(
+          sequenceData.id,
+          sequenceData.variationIndex,
+          sequenceData.duration,
+          sequenceData.moveSpeed,
+          sequenceData.flags,
+          sequenceData.frequency,
+          sequenceData.blendTime,
+          sequenceData.variationNext,
+          sequenceData.aliasNext,
+        ),
+      );
     }
   }
 
