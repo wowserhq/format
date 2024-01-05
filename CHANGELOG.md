@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.11.0](https://github.com/wowserhq/format/compare/v0.10.2...v0.11.0) (2024-01-05)
+
+
+### Features
+
+* **model:** add additional material flags ([10c430c](https://github.com/wowserhq/format/commit/10c430cb925b0db7b31379559ac1408c6f3bc632))
+* **model:** load loop information when loading models ([47f95ee](https://github.com/wowserhq/format/commit/47f95eea5af68c95879564979e5b94d53d7114e5))
+* **model:** load sequence information when loading models ([73a5ecb](https://github.com/wowserhq/format/commit/73a5ecb8149afdae0b3096542a779b392ee9fde2))
+
 ## [0.10.2](https://github.com/wowserhq/format/compare/v0.10.1...v0.10.2) (2024-01-04)
 
 
