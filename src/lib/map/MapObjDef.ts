@@ -35,3 +35,4 @@ class MapObjDef {
 }
 
 export default MapObjDef;
+export { MapObjDef };

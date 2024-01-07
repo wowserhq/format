@@ -47,3 +47,4 @@ class MapDoodadDef {
 }
 
 export default MapDoodadDef;
+export { MapDoodadDef };
