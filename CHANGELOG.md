@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/wowserhq/format/compare/v0.11.0...v0.12.0) (2024-01-07)
+
+
+### Features
+
+* **map:** export def types ([e88b214](https://github.com/wowserhq/format/commit/e88b21471da641be24dbd3c56bc4ad693cc1c3b9))
+
 ## [0.11.0](https://github.com/wowserhq/format/compare/v0.10.2...v0.11.0) (2024-01-05)
 
 
