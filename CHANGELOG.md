@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/wowserhq/format/compare/v0.13.0...v0.13.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* **clientdb:** export base record class ([c8c0d0c](https://github.com/wowserhq/format/commit/c8c0d0c9dc4d1e23568bc6a734eb8d9d88f932fe))
+
 ## [0.13.0](https://github.com/wowserhq/format/compare/v0.12.0...v0.13.0) (2024-01-10)
 
 
