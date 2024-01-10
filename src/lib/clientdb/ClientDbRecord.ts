@@ -23,3 +23,4 @@ class ClientDbRecord {
 }
 
 export default ClientDbRecord;
+export { ClientDbRecord };
