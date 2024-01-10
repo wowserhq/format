@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/wowserhq/format/compare/v0.12.0...v0.13.0) (2024-01-10)
+
+
+### Features
+
+* **clientdb:** add initial clientdb implementation ([#54](https://github.com/wowserhq/format/issues/54)) ([668c498](https://github.com/wowserhq/format/commit/668c4981cf13c0eaae61ca826f82e969414bfa34))
+
 ## [0.12.0](https://github.com/wowserhq/format/compare/v0.11.0...v0.12.0) (2024-01-07)
 
 
