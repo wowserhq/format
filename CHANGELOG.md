@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/wowserhq/format/compare/v0.15.0...v0.16.0) (2024-01-14)
+
+
+### Features
+
+* **model:** load model bounds ([94f04ee](https://github.com/wowserhq/format/commit/94f04ee7a8e5865c43f75f9c4f50243785b068dc))
+
 ## [0.15.0](https://github.com/wowserhq/format/compare/v0.14.0...v0.15.0) (2024-01-14)
 
 
