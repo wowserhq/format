@@ -13,15 +13,21 @@ import {
 } from './const.js';
 
 class MapChunk {
+  #areaId: number;
   #holes: number = 0;
   #layers: MapLayer[] = [];
   #position: Float32Array;
   #vertexHeights: Float32Array;
   #vertexNormals: Int8Array;
 
-  constructor(position: Float32Array, holes: number = 0) {
+  constructor(position: Float32Array, areaId: number, holes: number = 0) {
     this.#position = position;
+    this.#areaId = areaId;
     this.#holes = holes;
+  }
+
+  get areaId() {
+    return this.#areaId;
   }
 
   get layers() {

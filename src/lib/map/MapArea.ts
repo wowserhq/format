@@ -120,7 +120,7 @@ class MapArea {
     chunkData: globalThis.Map<string, any>,
     areaData: globalThis.Map<string, any>,
   ) {
-    const chunk = new MapChunk(chunkHeader.position, chunkHeader.holes);
+    const chunk = new MapChunk(chunkHeader.position, chunkHeader.areaId, chunkHeader.holes);
 
     // Vertices
 
