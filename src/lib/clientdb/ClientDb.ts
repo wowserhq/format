@@ -1,4 +1,4 @@
-import { IoSource, openStream } from '@wowserhq/io';
+import { IoSource, IoStream, openStream } from '@wowserhq/io';
 import ClientDbRecord from './ClientDbRecord.js';
 import * as dbIo from './io.js';
 
@@ -29,6 +29,7 @@ class ClientDb<T extends ClientDbRecord> {
     const stream = openStream(source);
 
     const header = dbIo.header.read(stream);
+    const stringBlockStream = this.#readStringBlock(stream, header);
 
     this.#recordCount = header.recordCount;
 
@@ -36,7 +37,7 @@ class ClientDb<T extends ClientDbRecord> {
     const recordsById = {};
 
     for (let i = 0; i < this.#recordCount; i++) {
-      const record = new this.#RecordClass().load(stream);
+      const record = new this.#RecordClass().load(stream, stringBlockStream);
 
       this.#minId = record.id < this.#minId ? record.id : this.#minId;
       this.#maxId = record.id > this.#maxId ? record.id : this.#maxId;
@@ -51,6 +52,26 @@ class ClientDb<T extends ClientDbRecord> {
     stream.close();
 
     return this;
+  }
+
+  #readStringBlock(stream: IoStream, header: any) {
+    const recordsStart = stream.offset;
+    const recordsSize = header.recordCount * header.recordSize;
+
+    const stringBlockStart = recordsStart + recordsSize;
+    const stringBlockSize = header.stringBlockSize;
+
+    // Save offset
+    const offset = stream.offset;
+
+    stream.offset = stringBlockStart;
+    const stringBlock = stream.readBytes(stringBlockSize);
+    const stringBlockStream = openStream(stringBlock);
+
+    // Restore offset
+    stream.offset = offset;
+
+    return stringBlockStream;
   }
 
   getRecord(id: number): T {

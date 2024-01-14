@@ -9,4 +9,6 @@ const header: IoType = io.struct({
   stringBlockSize: io.uint32le,
 });
 
-export { header };
+const string: IoType = io.string({ terminate: true });
+
+export { header, string };
