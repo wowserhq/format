@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.0](https://github.com/wowserhq/format/compare/v0.13.1...v0.14.0) (2024-01-14)
+
+
+### Features
+
+* **clientdb:** add AreaTableRecord ([d298b14](https://github.com/wowserhq/format/commit/d298b14ea1a5b28e975ee587b9a5363334a95629))
+* **clientdb:** add support for reading localized strings in db records ([4d31520](https://github.com/wowserhq/format/commit/4d315201def64219f66cd43889d419cc5a0ddc2e))
+
 ## [0.13.1](https://github.com/wowserhq/format/compare/v0.13.0...v0.13.1) (2024-01-10)
 
 
