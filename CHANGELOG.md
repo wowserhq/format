@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/wowserhq/format/compare/v0.14.0...v0.15.0) (2024-01-14)
+
+
+### Features
+
+* **map:** add area id to map chunks ([57265ce](https://github.com/wowserhq/format/commit/57265ce6b432c06199fa683e57f5ef67b6cf08d4))
+
 ## [0.14.0](https://github.com/wowserhq/format/compare/v0.13.1...v0.14.0) (2024-01-14)
 
 
