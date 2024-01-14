@@ -8,11 +8,14 @@ import M2TextureWeight from './M2TextureWeight.js';
 import M2TextureTransform from './M2TextureTransform.js';
 import { m2typedArray } from './io/common.js';
 import M2Sequence from './M2Sequence.js';
+import M2Bounds from './M2Bounds.js';
 
 class M2Model {
   #name: string;
   #flags: number;
   #vertices: ArrayBuffer;
+  #bounds: M2Bounds;
+  #collisionBounds: M2Bounds;
 
   #textures: M2Texture[] = [];
   #textureCombos: number[] = [];
@@ -28,6 +31,14 @@ class M2Model {
 
   #sequences: M2Sequence[] = [];
   #loops: Uint32Array;
+
+  get bounds() {
+    return this.#bounds;
+  }
+
+  get collisionBounds() {
+    return this.#collisionBounds;
+  }
 
   get flags() {
     return this.#flags;
@@ -107,6 +118,9 @@ class M2Model {
     this.#skinProfileCount = data.skinProfileCount;
     this.#vertices = data.vertices.buffer;
     this.#loops = data.loops;
+
+    this.#bounds = new M2Bounds(data.bounds.extent, data.bounds.radius);
+    this.#collisionBounds = new M2Bounds(data.collisionBounds.extent, data.collisionBounds.radius);
 
     this.#textureCombos = data.textureCombos;
     this.#textureCoordCombos = data.textureCoordCombos;
