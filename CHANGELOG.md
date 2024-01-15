@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.17.0](https://github.com/wowserhq/format/compare/v0.16.0...v0.17.0) (2024-01-15)
+
+
+### Features
+
+* **clientdb:** add support for reading non-localized strings in db records ([b73759c](https://github.com/wowserhq/format/commit/b73759c307d70e939aa6f3e2f7969ffddd58f0fb))
+* **clientdb:** add ZoneMusicRecord ([d379c6d](https://github.com/wowserhq/format/commit/d379c6ddacc2f2d48a06a4b8439a161df551ccb1))
+* **clientdb:** read locale strings in single locale ([a59c6ae](https://github.com/wowserhq/format/commit/a59c6ae8f56e7efb50ede25b3583c28709748b0b))
+
 ## [0.16.0](https://github.com/wowserhq/format/compare/v0.15.0...v0.16.0) (2024-01-14)
 
 
