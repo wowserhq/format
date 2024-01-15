@@ -1,5 +1,6 @@
 import * as io from '@wowserhq/io';
 import ClientDbRecord from '../ClientDbRecord.js';
+import * as dbIo from '../io.js';
 
 const recordIo = io.struct({
   id: io.int32le,
@@ -13,7 +14,7 @@ const recordIo = io.struct({
   zoneMusic: io.int32le,
   introSound: io.int32le,
   explorationLevel: io.int32le,
-  'areaName.locstring': io.array(io.uint32le, { size: 17 }),
+  areaName: dbIo.locString,
   factionGroupMask: io.int32le,
   liquidTypeId: io.array(io.int32le, { size: 4 }),
   minElevation: io.float32le,

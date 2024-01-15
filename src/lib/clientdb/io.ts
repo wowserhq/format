@@ -1,5 +1,7 @@
-import * as io from '@wowserhq/io';
 import { IoType } from '@wowserhq/io';
+import * as io from '@wowserhq/io';
+import DbLocStringIo from './io/DbLocStringIo.js';
+import DbStringIo from './io/DbStringIo.js';
 
 const header: IoType = io.struct({
   magic: io.string({ size: 4, terminate: false }),
@@ -9,6 +11,8 @@ const header: IoType = io.struct({
   stringBlockSize: io.uint32le,
 });
 
-const string: IoType = io.string({ terminate: true });
+const locString = new DbLocStringIo();
 
-export { header, string };
+const string = new DbStringIo();
+
+export { header, locString, string };
