@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/wowserhq/format/compare/v0.17.0...v0.18.0) (2024-01-15)
+
+
+### Features
+
+* **clientdb:** add SoundEntriesRecord ([864005e](https://github.com/wowserhq/format/commit/864005e4bc310451e7177f2d1384f7f55feaae5d))
+
 ## [0.17.0](https://github.com/wowserhq/format/compare/v0.16.0...v0.17.0) (2024-01-15)
 
 
