@@ -1,6 +1,7 @@
 import { IoSource, IoStream, openStream } from '@wowserhq/io';
 import ClientDbRecord from './ClientDbRecord.js';
 import * as dbIo from './io.js';
+import { DB_LOCALE } from './const.js';
 
 interface Constructor<T> {
   new (...args: any[]): T;
@@ -8,6 +9,7 @@ interface Constructor<T> {
 
 class ClientDb<T extends ClientDbRecord> {
   #RecordClass: Constructor<T>;
+  #locale: DB_LOCALE;
 
   #minId = 0xfffffff;
   #maxId = 0;
@@ -17,8 +19,9 @@ class ClientDb<T extends ClientDbRecord> {
   #records: T[];
   #recordsById: Record<number, T>;
 
-  constructor(RecordClass: Constructor<T>) {
+  constructor(RecordClass: Constructor<T>, locale = DB_LOCALE.LOCALE_ENUS) {
     this.#RecordClass = RecordClass;
+    this.#locale = locale;
   }
 
   get records() {
@@ -37,7 +40,7 @@ class ClientDb<T extends ClientDbRecord> {
     const recordsById = {};
 
     for (let i = 0; i < this.#recordCount; i++) {
-      const record = new this.#RecordClass().load(stream, stringBlockStream);
+      const record = new this.#RecordClass().load(stream, stringBlockStream, this.#locale);
 
       this.#minId = record.id < this.#minId ? record.id : this.#minId;
       this.#maxId = record.id > this.#maxId ? record.id : this.#maxId;
@@ -92,4 +95,4 @@ class ClientDb<T extends ClientDbRecord> {
 }
 
 export default ClientDb;
-export { ClientDb };
+export { ClientDb, DB_LOCALE };

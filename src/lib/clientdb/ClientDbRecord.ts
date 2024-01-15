@@ -1,5 +1,6 @@
 import { IoStream, IoType } from '@wowserhq/io';
 import * as dbIo from './io.js';
+import { DB_LOCALE } from './const.js';
 
 class ClientDbRecord {
   id: number;
@@ -10,15 +11,15 @@ class ClientDbRecord {
     this.#recordIo = recordIo;
   }
 
-  load(stream: IoStream, stringBlock: IoStream) {
+  load(stream: IoStream, stringBlock: IoStream, locale: DB_LOCALE) {
     const record = this.#recordIo.read(stream);
 
     for (const [key, value] of Object.entries(record)) {
       if (key.endsWith('.locstring')) {
-        const strings = this.#readLocString(value as number[], stringBlock);
+        const string = this.#readLocString(value as number[], stringBlock, locale);
         const normalizedKey = key.replace('.locstring', '');
 
-        this[normalizedKey] = strings;
+        this[normalizedKey] = string;
       } else {
         this[key] = value;
       }
@@ -27,22 +28,18 @@ class ClientDbRecord {
     return this;
   }
 
-  #readLocString(value: number[], stringBlock: IoStream) {
+  #readLocString(value: number[], stringBlock: IoStream, locale: DB_LOCALE) {
     // All values before last are offsets in the string block
     const offsets = value.slice(0, -1);
 
     // Last value is flags
     const flags = value.at(-1);
 
-    const strings: string[] = [];
+    // Read locale-specific string
+    stringBlock.offset = offsets[locale];
+    const localeString = dbIo.string.read(stringBlock);
 
-    for (const offset of offsets) {
-      stringBlock.offset = offset;
-      const string = dbIo.string.read(stringBlock);
-      strings.push(string);
-    }
-
-    return strings;
+    return localeString;
   }
 }
 

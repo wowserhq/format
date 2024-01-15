@@ -32,7 +32,7 @@ class AreaTableRecord extends ClientDbRecord {
   zoneMusic: number;
   introSound: number;
   explorationLevel: number;
-  areaName: string[];
+  areaName: string;
   factionGroupMask: number;
   liquidTypeId: number[];
   minElevation: number;

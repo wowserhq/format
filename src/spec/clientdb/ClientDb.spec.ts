@@ -18,7 +18,7 @@ describe('ClientDb', () => {
       const record = dbc.getRecordByIndex(1);
 
       expect(record.id).toBe(2);
-      expect(record.areaName[0]).toBe('Longshore');
+      expect(record.areaName).toBe('Longshore');
       expect(record.minElevation).toBe(-500);
     });
   });
