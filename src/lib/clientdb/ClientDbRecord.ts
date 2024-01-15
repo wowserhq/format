@@ -20,6 +20,11 @@ class ClientDbRecord {
         const normalizedKey = key.replace('.locstring', '');
 
         this[normalizedKey] = string;
+      } else if (key.endsWith('.string')) {
+        const string = this.#readString(value as number, stringBlock);
+        const normalizedKey = key.replace('.string', '');
+
+        this[normalizedKey] = string;
       } else {
         this[key] = value;
       }
@@ -40,6 +45,13 @@ class ClientDbRecord {
     const localeString = dbIo.string.read(stringBlock);
 
     return localeString;
+  }
+
+  #readString(offset: number, stringBlock: IoStream) {
+    stringBlock.offset = offset;
+    const string = dbIo.string.read(stringBlock);
+
+    return string;
   }
 }
 
