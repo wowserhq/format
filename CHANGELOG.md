@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/wowserhq/format/compare/v0.18.0...v0.19.0) (2024-01-22)
+
+
+### Features
+
+* **model:** add full shader selection logic to batches ([#68](https://github.com/wowserhq/format/issues/68)) ([7725533](https://github.com/wowserhq/format/commit/772553358b0d1cae46954ed402cf4afa4d00f751))
+
 ## [0.18.0](https://github.com/wowserhq/format/compare/v0.17.0...v0.18.0) (2024-01-15)
 
 
