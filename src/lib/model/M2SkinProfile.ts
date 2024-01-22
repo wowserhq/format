@@ -3,8 +3,8 @@ import * as m2Io from './io/m2.js';
 import M2Batch from './M2Batch.js';
 import M2Model from './M2Model.js';
 import M2SkinSection from './M2SkinSection.js';
-import M2BatchTexture from './M2BatchTexture.js';
-import { M2_MATERIAL_BLEND, M2_MODEL_FLAG, M2_TEXTURE_COMBINER } from './const.js';
+import { M2_FRAGMENT_SHADER, M2_VERTEX_SHADER } from './const.js';
+import { getBatchShaders, normalizeBatches } from './batch.js';
 
 class M2SkinProfile {
   #model: M2Model;
@@ -66,56 +66,25 @@ class M2SkinProfile {
   }
 
   #loadBatches(data: any) {
-    for (const batchData of data.batches) {
-      // TODO process batches above layer 0 - while batches above layer 0 are typically discarded
-      //      at runtime, they occasionally contain information needed to identify
-      //      specialized shading logic (eg. Combiners_Opaque_Mod2xNA_Alpha)
-      if (batchData.materialLayer > 0) {
+    for (const batchData of normalizeBatches(this.#model, data.batches)) {
+      const { vertexShader, fragmentShader } = getBatchShaders(this.#model, batchData);
+
+      if (
+        vertexShader === M2_VERTEX_SHADER.VERTEX_UNKNOWN ||
+        fragmentShader === M2_FRAGMENT_SHADER.FRAGMENT_UNKNOWN
+      ) {
         continue;
       }
 
       const skinSection = this.#skinSections[batchData.skinSectionIndex];
       const material = this.#model.materials[batchData.materialIndex];
-      const useCombinerCombos = this.#model.flags & M2_MODEL_FLAG.USE_COMBINER_COMBOS;
 
       const textures = [];
       for (let i = 0; i < batchData.textureCount; i++) {
-        const textureIndex = this.#model.textureCombos[batchData.textureComboIndex + i];
+        const textureIndex = batchData.textureIndices[i];
         const texture = this.#model.textures[textureIndex];
 
-        let textureCombiner = M2_TEXTURE_COMBINER.COMBINER_OPAQUE;
-        if (useCombinerCombos) {
-          if (i === 0 && material.blend === M2_MATERIAL_BLEND.BLEND_OPAQUE) {
-            textureCombiner = M2_TEXTURE_COMBINER.COMBINER_OPAQUE;
-          } else {
-            textureCombiner = this.#model.textureCombinerCombos[batchData.shaderId + i];
-          }
-        } else {
-          textureCombiner =
-            material.blend === M2_MATERIAL_BLEND.BLEND_OPAQUE
-              ? M2_TEXTURE_COMBINER.COMBINER_OPAQUE
-              : M2_TEXTURE_COMBINER.COMBINER_MOD;
-        }
-
-        const textureCoord = this.#model.textureCoordCombos[batchData.textureCoordComboIndex + i];
-
-        const textureWeightIndex =
-          this.#model.textureWeightCombos[batchData.textureWeightComboIndex + i];
-        const textureWeight = this.#model.textureWeights[textureWeightIndex];
-
-        const textureTransformIndex =
-          this.#model.textureTransformCombos[batchData.textureTransformComboIndex + i];
-        const textureTransform = this.#model.textureTransforms[textureTransformIndex];
-
-        textures.push(
-          new M2BatchTexture(
-            texture,
-            textureCombiner,
-            textureCoord,
-            textureWeight,
-            textureTransform,
-          ),
-        );
+        textures.push(texture);
       }
 
       const batch = new M2Batch(
@@ -123,7 +92,10 @@ class M2SkinProfile {
         batchData.priorityPlane,
         skinSection,
         material,
+        batchData.materialLayer,
         textures,
+        vertexShader,
+        fragmentShader,
       );
 
       this.#batches.push(batch);
