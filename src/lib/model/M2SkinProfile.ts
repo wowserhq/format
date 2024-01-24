@@ -87,6 +87,9 @@ class M2SkinProfile {
         textures.push(texture);
       }
 
+      const textureWeightIndex = this.#model.textureWeightCombos[batchData.textureWeightComboIndex];
+      const textureTransformIndices = batchData.textureTransformIndices.filter((i) => i !== 0xffff);
+
       const batch = new M2Batch(
         batchData.flags,
         batchData.priorityPlane,
@@ -94,6 +97,8 @@ class M2SkinProfile {
         material,
         batchData.materialLayer,
         textures,
+        textureWeightIndex,
+        textureTransformIndices,
         vertexShader,
         fragmentShader,
       );

@@ -22,10 +22,10 @@ const m2bounds: IoType = io.struct({
 
 const m2track = (type: IoType, elements = 1): IoType =>
   io.struct({
-    interpolationType: io.uint16le,
-    globalSequence: io.uint16le,
-    timestamps: m2array(m2typedArray(io.uint32le)),
-    values: m2array(m2typedArray(type, elements)),
+    trackType: io.uint16le,
+    loopIndex: io.uint16le,
+    sequenceTimes: m2array(m2typedArray(io.uint32le)),
+    sequenceKeys: m2array(m2typedArray(type, elements)),
   });
 
 export { m2array, m2typedArray, m2string, m2range, m2bounds, m2track };

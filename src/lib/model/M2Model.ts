@@ -2,10 +2,9 @@ import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as io from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
 import { M2_MODEL_FLAG } from './const.js';
+import { M2Track, M2TextureTransform, M2TextureWeight } from './types.js';
 import M2Texture, { M2_TEXTURE_COMBINER, M2_TEXTURE_COORD } from './M2Texture.js';
 import M2Material from './M2Material.js';
-import M2TextureWeight from './M2TextureWeight.js';
-import M2TextureTransform from './M2TextureTransform.js';
 import { m2typedArray } from './io/common.js';
 import M2Sequence from './M2Sequence.js';
 import M2Bounds from './M2Bounds.js';
@@ -128,8 +127,8 @@ class M2Model {
     this.#textureTransformCombos = data.textureTransformCombos;
 
     this.#loadTextures(data);
-    this.#loadTextureTransforms(data);
-    this.#loadTextureWeights(data);
+    this.#textureTransforms = data.textureTransforms;
+    this.#textureWeights = data.textureWeights;
 
     this.#loadMaterials(data);
 
@@ -169,25 +168,7 @@ class M2Model {
       );
     }
   }
-
-  #loadTextureTransforms(data: any) {
-    for (const textureTransformData of data.textureTransforms) {
-      this.#textureTransforms.push(
-        new M2TextureTransform(
-          textureTransformData.translationTrack,
-          textureTransformData.rotationTrack,
-          textureTransformData.scalingTrack,
-        ),
-      );
-    }
-  }
-
-  #loadTextureWeights(data: any) {
-    for (const textureWeightData of data.textureWeights) {
-      this.#textureWeights.push(new M2TextureWeight(textureWeightData.weightTrack));
-    }
-  }
 }
 
 export default M2Model;
-export { M2Model, M2_MODEL_FLAG };
+export { M2Model, M2Track, M2TextureWeight, M2TextureTransform, M2_MODEL_FLAG };

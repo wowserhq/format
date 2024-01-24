@@ -49,7 +49,7 @@ const m2texture = io.struct({
 });
 
 const m2textureWeight = io.struct({
-  weightTrack: m2track(io.uint16le),
+  weightTrack: m2track(io.int16le),
 });
 
 const m2textureTransform = io.struct({
