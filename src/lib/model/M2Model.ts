@@ -2,7 +2,7 @@ import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as io from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
 import { M2_MODEL_FLAG } from './const.js';
-import { M2Track, M2TextureTransform, M2TextureWeight } from './types.js';
+import { M2Track, M2TextureTransform, M2TextureWeight, M2Color } from './types.js';
 import M2Texture, { M2_TEXTURE_COMBINER, M2_TEXTURE_COORD } from './M2Texture.js';
 import M2Material from './M2Material.js';
 import { m2typedArray } from './io/common.js';
@@ -25,6 +25,8 @@ class M2Model {
   #textureTransformCombos: number[] = [];
   #textureCombinerCombos: M2_TEXTURE_COMBINER[] = [];
 
+  #colors: M2Color[] = [];
+
   #materials: M2Material[] = [];
   #skinProfileCount: number;
 
@@ -37,6 +39,10 @@ class M2Model {
 
   get collisionBounds() {
     return this.#collisionBounds;
+  }
+
+  get colors() {
+    return this.#colors;
   }
 
   get flags() {
@@ -130,6 +136,8 @@ class M2Model {
     this.#textureTransforms = data.textureTransforms;
     this.#textureWeights = data.textureWeights;
 
+    this.#colors = data.colors;
+
     this.#loadMaterials(data);
 
     this.#loadSequences(data);
@@ -171,4 +179,4 @@ class M2Model {
 }
 
 export default M2Model;
-export { M2Model, M2Track, M2TextureWeight, M2TextureTransform, M2_MODEL_FLAG };
+export { M2Model, M2Track, M2Color, M2TextureWeight, M2TextureTransform, M2_MODEL_FLAG };

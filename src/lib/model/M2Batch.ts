@@ -12,6 +12,7 @@ class M2Batch {
   #textures: M2Texture[];
   #textureWeightIndex: number;
   #textureTransformIndices: number[];
+  #colorIndex: number;
   #vertexShader: M2_VERTEX_SHADER;
   #fragmentShader: M2_FRAGMENT_SHADER;
 
@@ -24,6 +25,7 @@ class M2Batch {
     textures: M2Texture[],
     textureWeightIndex: number,
     textureTransformIndices: number[],
+    colorIndex: number,
     vertexShader: M2_VERTEX_SHADER,
     fragmentShader: M2_FRAGMENT_SHADER,
   ) {
@@ -35,8 +37,13 @@ class M2Batch {
     this.#textures = textures;
     this.#textureWeightIndex = textureWeightIndex;
     this.#textureTransformIndices = textureTransformIndices;
+    this.#colorIndex = colorIndex;
     this.#vertexShader = vertexShader;
     this.#fragmentShader = fragmentShader;
+  }
+
+  get colorIndex() {
+    return this.#colorIndex;
   }
 
   get flags() {

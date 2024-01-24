@@ -99,6 +99,7 @@ class M2SkinProfile {
         textures,
         textureWeightIndex,
         textureTransformIndices,
+        batchData.colorIndex,
         vertexShader,
         fragmentShader,
       );

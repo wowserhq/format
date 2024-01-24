@@ -39,7 +39,7 @@ const m2vertex = io.struct({
 
 const m2color = io.struct({
   colorTrack: m2track(io.float32le, 3),
-  alphaTrack: m2track(io.uint16le),
+  alphaTrack: m2track(io.int16le),
 });
 
 const m2texture = io.struct({

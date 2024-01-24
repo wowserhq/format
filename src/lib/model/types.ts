@@ -5,6 +5,11 @@ type M2Track<T> = {
   sequenceKeys: T[];
 };
 
+type M2Color = {
+  colorTrack: M2Track<Float32Array>;
+  alphaTrack: M2Track<Int16Array>;
+};
+
 type M2TextureTransform = {
   translationTrack: M2Track<Float32Array>;
   rotationTrack: M2Track<Float32Array>;
@@ -15,4 +20,4 @@ type M2TextureWeight = {
   weightTrack: M2Track<Int16Array>;
 };
 
-export { M2Track, M2TextureTransform, M2TextureWeight };
+export { M2Track, M2Color, M2TextureTransform, M2TextureWeight };
