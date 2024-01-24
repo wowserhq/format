@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0](https://github.com/wowserhq/format/compare/v0.19.0...v0.20.0) (2024-01-24)
+
+
+### Features
+
+* **model:** improve texture animation handling ([58ea74f](https://github.com/wowserhq/format/commit/58ea74f960b01f00a41fdcd01f7917d9d19b5c31))
+
 ## [0.19.0](https://github.com/wowserhq/format/compare/v0.18.0...v0.19.0) (2024-01-22)
 
 
