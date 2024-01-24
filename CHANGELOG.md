@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/wowserhq/format/compare/v0.20.0...v0.21.0) (2024-01-24)
+
+
+### Features
+
+* **model:** load color animations ([a2b6750](https://github.com/wowserhq/format/commit/a2b6750f83d98216a5cd36fb869f8160667a58fd))
+
 ## [0.20.0](https://github.com/wowserhq/format/compare/v0.19.0...v0.20.0) (2024-01-24)
 
 
