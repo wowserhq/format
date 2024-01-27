@@ -2,7 +2,7 @@ import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as io from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
 import { M2_MODEL_FLAG } from './const.js';
-import { M2Track, M2TextureTransform, M2TextureWeight, M2Color } from './types.js';
+import { M2Track, M2TextureTransform, M2TextureWeight, M2Color, M2Bone } from './types.js';
 import M2Texture, { M2_TEXTURE_COMBINER, M2_TEXTURE_COORD } from './M2Texture.js';
 import M2Material from './M2Material.js';
 import { m2typedArray } from './io/common.js';
@@ -12,9 +12,14 @@ import M2Bounds from './M2Bounds.js';
 class M2Model {
   #name: string;
   #flags: number;
+
   #vertices: ArrayBuffer;
+
   #bounds: M2Bounds;
   #collisionBounds: M2Bounds;
+
+  #bones: M2Bone[] = [];
+  #boneIndicesById: Uint16Array;
 
   #textures: M2Texture[] = [];
   #textureCombos: number[] = [];
@@ -32,6 +37,14 @@ class M2Model {
 
   #sequences: M2Sequence[] = [];
   #loops: Uint32Array;
+
+  get bones() {
+    return this.#bones;
+  }
+
+  get boneIndicesById() {
+    return this.#boneIndicesById;
+  }
 
   get bounds() {
     return this.#bounds;
@@ -127,6 +140,9 @@ class M2Model {
     this.#bounds = new M2Bounds(data.bounds.extent, data.bounds.radius);
     this.#collisionBounds = new M2Bounds(data.collisionBounds.extent, data.collisionBounds.radius);
 
+    this.#bones = data.bones;
+    this.#boneIndicesById = data.boneIndicesById;
+
     this.#textureCombos = data.textureCombos;
     this.#textureCoordCombos = data.textureCoordCombos;
     this.#textureWeightCombos = data.textureWeightCombos;
@@ -179,4 +195,4 @@ class M2Model {
 }
 
 export default M2Model;
-export { M2Model, M2Track, M2Color, M2TextureWeight, M2TextureTransform, M2_MODEL_FLAG };
+export { M2Model, M2Track, M2Bone, M2Color, M2TextureWeight, M2TextureTransform, M2_MODEL_FLAG };

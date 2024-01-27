@@ -18,10 +18,10 @@ const m2sequence = io.struct({
 });
 
 const m2compBone = io.struct({
-  keyBoneId: io.int32le,
+  boneId: io.int32le,
   flags: io.uint32le,
-  parentBone: io.int16le,
-  submeshId: io.uint16le,
+  parentIndex: io.int16le,
+  distToParent: io.uint16le,
   boneNameCrc: io.uint32le,
   translationTrack: m2track(io.float32le, 3),
   rotationTrack: m2track(io.int16le, 4),
