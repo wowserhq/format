@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/wowserhq/format/compare/v0.21.0...v0.22.0) (2024-01-27)
+
+
+### Features
+
+* **model:** load bones and bone animations ([7bbf61c](https://github.com/wowserhq/format/commit/7bbf61c57f9e9f2cf52fbffd46ec70cbb3102e78))
+
 ## [0.21.0](https://github.com/wowserhq/format/compare/v0.20.0...v0.21.0) (2024-01-24)
 
 
