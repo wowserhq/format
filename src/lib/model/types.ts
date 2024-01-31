@@ -5,6 +5,11 @@ type M2Track<T> = {
   sequenceKeys: T[];
 };
 
+type M2Bounds = {
+  extent: Float32Array;
+  radius: number;
+};
+
 type M2Bone = {
   boneId: number;
   flags: number;
@@ -22,6 +27,19 @@ type M2Color = {
   alphaTrack: M2Track<Int16Array>;
 };
 
+type M2Sequence = {
+  id: number;
+  variationIndex: number;
+  duration: number;
+  moveSpeed: number;
+  flags: number;
+  frequency: number;
+  blendTime: number;
+  bounds: M2Bounds;
+  variationNext: number;
+  aliasNext: number;
+};
+
 type M2TextureTransform = {
   translationTrack: M2Track<Float32Array>;
   rotationTrack: M2Track<Float32Array>;
@@ -32,4 +50,4 @@ type M2TextureWeight = {
   weightTrack: M2Track<Int16Array>;
 };
 
-export { M2Track, M2Bone, M2Color, M2TextureTransform, M2TextureWeight };
+export { M2Bone, M2Color, M2Sequence, M2TextureTransform, M2TextureWeight, M2Track };

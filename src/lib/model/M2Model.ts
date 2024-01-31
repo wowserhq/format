@@ -2,11 +2,17 @@ import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as io from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
 import { M2_MODEL_FLAG } from './const.js';
-import { M2Track, M2TextureTransform, M2TextureWeight, M2Color, M2Bone } from './types.js';
+import {
+  M2Sequence,
+  M2Track,
+  M2TextureTransform,
+  M2TextureWeight,
+  M2Color,
+  M2Bone,
+} from './types.js';
 import M2Texture, { M2_TEXTURE_COMBINER, M2_TEXTURE_COORD } from './M2Texture.js';
 import M2Material from './M2Material.js';
 import { m2typedArray } from './io/common.js';
-import M2Sequence from './M2Sequence.js';
 import M2Bounds from './M2Bounds.js';
 
 class M2Model {
@@ -156,7 +162,7 @@ class M2Model {
 
     this.#loadMaterials(data);
 
-    this.#loadSequences(data);
+    this.#sequences = data.sequences;
 
     return this;
   }
@@ -164,24 +170,6 @@ class M2Model {
   #loadMaterials(data: any) {
     for (const materialData of data.materials) {
       this.#materials.push(new M2Material(materialData.flags, materialData.blendMode));
-    }
-  }
-
-  #loadSequences(data: any) {
-    for (const sequenceData of data.sequences) {
-      this.#sequences.push(
-        new M2Sequence(
-          sequenceData.id,
-          sequenceData.variationIndex,
-          sequenceData.duration,
-          sequenceData.moveSpeed,
-          sequenceData.flags,
-          sequenceData.frequency,
-          sequenceData.blendTime,
-          sequenceData.variationNext,
-          sequenceData.aliasNext,
-        ),
-      );
     }
   }
 
@@ -195,4 +183,13 @@ class M2Model {
 }
 
 export default M2Model;
-export { M2Model, M2Track, M2Bone, M2Color, M2TextureWeight, M2TextureTransform, M2_MODEL_FLAG };
+export {
+  M2Model,
+  M2Track,
+  M2Bone,
+  M2Color,
+  M2Sequence,
+  M2TextureWeight,
+  M2TextureTransform,
+  M2_MODEL_FLAG,
+};
