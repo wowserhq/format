@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/wowserhq/format/compare/v0.22.0...v0.23.0) (2024-01-31)
+
+
+### Features
+
+* **model:** include sequence bounds ([027f7d8](https://github.com/wowserhq/format/commit/027f7d800f7795de4327d74ca4bce3186619379a))
+
 ## [0.22.0](https://github.com/wowserhq/format/compare/v0.21.0...v0.22.0) (2024-01-27)
 
 
