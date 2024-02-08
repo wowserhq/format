@@ -1,7 +1,7 @@
 import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as io from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
-import { M2_MODEL_FLAG } from './const.js';
+import { M2_BONE_FLAG, M2_MODEL_FLAG } from './const.js';
 import {
   M2Sequence,
   M2Track,
@@ -191,5 +191,6 @@ export {
   M2Sequence,
   M2TextureWeight,
   M2TextureTransform,
+  M2_BONE_FLAG,
   M2_MODEL_FLAG,
 };
