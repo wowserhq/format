@@ -21,15 +21,13 @@ describe('MapArea', () => {
 
         const doodadDef1 = mapArea.doodadDefs.find((def) => def.id === 206410);
         expect(doodadDef1.name.split(/\\/).at(-1)).toBe('TIRISFALLGLADECANOPYTREE05.M2');
-        expect(doodadDef1.rotation).toEqual(new Float32Array([0, 0, 1, 6.123234262925839e-17]));
+        expect(doodadDef1.rotation).toEqual([0, 0, 1, 6.123234262925839e-17]);
 
         const doodadDef2 = mapArea.doodadDefs.find((def) => def.id === 2542963);
         expect(doodadDef2.name.split(/\\/).at(-1)).toBe('TIRISFALLGLADECANOPYTREE05.M2');
-        expect(doodadDef2.rotation).toEqual(
-          new Float32Array([
-            0.0701502189040184, -0.038644179701805115, 0.9901213645935059, 0.11508788913488388,
-          ]),
-        );
+        expect(doodadDef2.rotation).toEqual([
+          0.0701502189040184, -0.038644179701805115, 0.9901213645935059, 0.11508788913488388,
+        ]);
       });
     });
 

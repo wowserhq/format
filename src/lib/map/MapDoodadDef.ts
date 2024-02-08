@@ -1,17 +1,11 @@
 class MapDoodadDef {
   #name: string;
   #id: number;
-  #position: Float32Array;
-  #rotation: Float32Array;
+  #position: number[];
+  #rotation: number[];
   #scale: number;
 
-  constructor(
-    name: string,
-    id: number,
-    position: Float32Array,
-    rotation: Float32Array,
-    scale: number,
-  ) {
+  constructor(name: string, id: number, position: number[], rotation: number[], scale: number) {
     this.#name = name;
     this.#id = id;
     this.#position = position;

@@ -13,8 +13,8 @@ const mapChunkInfo = io.struct({
 const mapDoodadDef = io.struct({
   nameId: io.uint32le,
   uniqueId: io.uint32le,
-  position: io.typedArray(io.float32le, { size: 3 }),
-  rotation: io.typedArray(io.float32le, { size: 3 }),
+  position: io.array(io.float32le, { size: 3 }),
+  rotation: io.array(io.float32le, { size: 3 }),
   scale: io.uint16le,
   flags: io.uint16le,
 });
@@ -22,9 +22,9 @@ const mapDoodadDef = io.struct({
 const mapObjDef = io.struct({
   nameId: io.uint32le,
   uniqueId: io.uint32le,
-  position: io.typedArray(io.float32le, { size: 3 }),
-  rotation: io.typedArray(io.float32le, { size: 3 }),
-  extents: io.typedArray(io.float32le, { size: 6 }),
+  position: io.array(io.float32le, { size: 3 }),
+  rotation: io.array(io.float32le, { size: 3 }),
+  extents: io.array(io.float32le, { size: 6 }),
   flags: io.uint16le,
   doodadSet: io.uint16le,
   nameSet: io.uint16le,

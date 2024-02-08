@@ -1,10 +1,10 @@
 class MapObjDef {
   #name: string;
   #id: number;
-  #position: Float32Array;
-  #rotation: Float32Array;
+  #position: number[];
+  #rotation: number[];
 
-  constructor(name: string, id: number, position: Float32Array, rotation: Float32Array) {
+  constructor(name: string, id: number, position: number[], rotation: number[]) {
     this.#name = name;
     this.#id = id;
     this.#position = position;

@@ -63,8 +63,8 @@ class Map {
    *
    * @param defPosition - Vector in doodad / map obj def coordinate system
    */
-  static getNormalizedDefPosition(defPosition: Float32Array) {
-    const normalized = new Float32Array(3);
+  static getNormalizedDefPosition(defPosition: number[]) {
+    const normalized = new Array(3);
 
     normalized[0] = MAP_CORNER_X - defPosition[2];
     normalized[1] = MAP_CORNER_Y - defPosition[0];
@@ -79,13 +79,13 @@ class Map {
    *
    * @param defRotation - Euler angle in doodad / map obj def coordinate system
    */
-  static getNormalizedDefRotation(defRotation: Float32Array) {
+  static getNormalizedDefRotation(defRotation: number[]) {
     const normalized = quat.create();
 
     // glMatrix defaults to the correct euler order (zyx) to convert to the map coordinate system
     quat.fromEuler(normalized, defRotation[2], defRotation[0], defRotation[1] + 180);
 
-    return normalized as Float32Array;
+    return Array.from(normalized);
   }
 
   load(source: IoSource) {
