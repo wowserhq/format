@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.24.0](https://github.com/wowserhq/format/compare/v0.23.0...v0.24.0) (2024-02-08)
+
+
+### Features
+
+* **model:** add bone flag enum ([e78d399](https://github.com/wowserhq/format/commit/e78d399df9d01c7684798df5021b3c7ef5c921e5))
+
 ## [0.23.0](https://github.com/wowserhq/format/compare/v0.22.0...v0.23.0) (2024-01-31)
 
 
