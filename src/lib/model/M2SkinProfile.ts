@@ -2,8 +2,8 @@ import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import * as m2Io from './io/m2.js';
 import M2Batch from './M2Batch.js';
 import M2Model from './M2Model.js';
-import M2SkinSection from './M2SkinSection.js';
 import { M2_FRAGMENT_SHADER, M2_VERTEX_SHADER } from './const.js';
+import { M2SkinSection } from './types.js';
 import { getBatchShaders, normalizeBatches } from './batch.js';
 
 class M2SkinProfile {
@@ -53,13 +53,20 @@ class M2SkinProfile {
 
   #loadSkinSections(data: any) {
     for (const skinSectionData of data.skinSections) {
-      const skinSection = new M2SkinSection(
-        skinSectionData.skinSectionId,
-        skinSectionData.vertexStart | (skinSectionData.level << 16),
-        skinSectionData.vertexCount,
-        skinSectionData.indexStart | (skinSectionData.level << 16),
-        skinSectionData.indexCount,
-      );
+      const skinSection = {
+        id: skinSectionData.id,
+        vertexStart: skinSectionData.vertexStart | (skinSectionData.level << 16),
+        vertexCount: skinSectionData.vertexCount,
+        indexStart: skinSectionData.indexStart | (skinSectionData.level << 16),
+        indexCount: skinSectionData.indexCount,
+        boneCount: skinSectionData.boneCount,
+        boneComboIndex: skinSectionData.boneComboIndex,
+        boneInfluences: skinSectionData.boneInfluences,
+        centerBoneIndex: skinSectionData.centerBoneIndex,
+        centerPosition: skinSectionData.centerPosition,
+        sortCenterPosition: skinSectionData.sortCenterPosition,
+        sortRadius: skinSectionData.sortRadius,
+      };
 
       this.#skinSections.push(skinSection);
     }

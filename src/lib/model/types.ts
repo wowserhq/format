@@ -40,6 +40,21 @@ type M2Sequence = {
   aliasNext: number;
 };
 
+type M2SkinSection = {
+  id: number;
+  vertexStart: number;
+  vertexCount: number;
+  indexStart: number;
+  indexCount: number;
+  boneCount: number;
+  boneComboIndex: number;
+  boneInfluences: number;
+  centerBoneIndex: number;
+  centerPosition: number[];
+  sortCenterPosition: number[];
+  sortRadius: number;
+};
+
 type M2TextureTransform = {
   translationTrack: M2Track<Float32Array>;
   rotationTrack: M2Track<Float32Array>;
@@ -50,4 +65,4 @@ type M2TextureWeight = {
   weightTrack: M2Track<Int16Array>;
 };
 
-export { M2Bone, M2Color, M2Sequence, M2TextureTransform, M2TextureWeight, M2Track };
+export { M2Bone, M2Color, M2Sequence, M2SkinSection, M2TextureTransform, M2TextureWeight, M2Track };

@@ -116,7 +116,7 @@ const m2particle = io.struct({
 });
 
 const m2skinSection = io.struct({
-  skinSectionId: io.uint16le,
+  id: io.uint16le,
   level: io.uint16le,
   vertexStart: io.uint16le,
   vertexCount: io.uint16le,
@@ -126,8 +126,8 @@ const m2skinSection = io.struct({
   boneComboIndex: io.uint16le,
   boneInfluences: io.uint16le,
   centerBoneIndex: io.uint16le,
-  centerPosition: io.typedArray(io.float32le, { size: 3 }),
-  sortCenterPosition: io.typedArray(io.float32le, { size: 3 }),
+  centerPosition: io.array(io.float32le, { size: 3 }),
+  sortCenterPosition: io.array(io.float32le, { size: 3 }),
   sortRadius: io.float32le,
 });
 

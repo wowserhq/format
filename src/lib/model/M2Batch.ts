@@ -1,7 +1,7 @@
 import M2Material from './M2Material.js';
-import M2SkinSection from './M2SkinSection.js';
 import M2Texture from './M2Texture.js';
 import { M2_FRAGMENT_SHADER, M2_VERTEX_SHADER } from './const.js';
+import { M2SkinSection } from './types.js';
 
 class M2Batch {
   #flags: number;
