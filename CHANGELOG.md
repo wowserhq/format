@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.0](https://github.com/wowserhq/format/compare/v0.24.0...v0.25.0) (2024-02-10)
+
+
+### Features
+
+* **model:** expose all skin section attributes ([f459180](https://github.com/wowserhq/format/commit/f4591805c98ea12df8b7f42cdcfa3da120a954c9))
+
 ## [0.24.0](https://github.com/wowserhq/format/compare/v0.23.0...v0.24.0) (2024-02-08)
 
 
