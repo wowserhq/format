@@ -1,7 +1,7 @@
 import * as io from '@wowserhq/io';
 import { IoType } from '@wowserhq/io';
 
-const imvec = io.struct({
+const imvec: IoType = io.struct({
   r: io.uint8,
   g: io.uint8,
   b: io.uint8,
@@ -10,7 +10,7 @@ const imvec = io.struct({
 
 const mapObjString: IoType = io.string();
 
-const mver = io.struct({
+const mver: IoType = io.struct({
   version: io.uint32le,
 });
 
