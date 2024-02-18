@@ -12,6 +12,9 @@ export * from './map/MapLayer.js';
 export * from './map/MapDoodadDef.js';
 export * from './map/MapObjDef.js';
 
+export * from './mapobj/MapObj.js';
+export * from './mapobj/MapObjGroup.js';
+
 export * from './model/M2Model.js';
 export * from './model/M2SkinProfile.js';
 export * from './model/M2Batch.js';
