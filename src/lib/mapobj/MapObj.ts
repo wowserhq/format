@@ -124,6 +124,7 @@ class MapObj {
 export default MapObj;
 export {
   MapObj,
+  MapObjGroupInfo,
   MapObjMaterial,
   MAP_OBJ_FLAG,
   MAP_OBJ_GROUP_FLAG,
