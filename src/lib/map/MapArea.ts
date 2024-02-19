@@ -5,7 +5,7 @@ import { indexChunks } from '../util.js';
 import Map from './Map.js';
 import MapChunk from './MapChunk.js';
 import MapLayer from './MapLayer.js';
-import MapDoodadDef from './MapDoodadDef.js';
+import { MapDoodadDef } from './types.js';
 import MapObjDef from './MapObjDef.js';
 import {
   MAP_CHUNK_FLAG,
@@ -84,9 +84,13 @@ class MapArea {
       const normalizedPosition = Map.getNormalizedDefPosition(def.position);
       const normalizedRotation = Map.getNormalizedDefRotation(def.rotation);
 
-      this.#doodadDefs.push(
-        new MapDoodadDef(name, def.uniqueId, normalizedPosition, normalizedRotation, def.scale),
-      );
+      this.#doodadDefs.push({
+        id: def.uniqueId,
+        name: name,
+        position: normalizedPosition,
+        rotation: normalizedRotation,
+        scale: def.scale,
+      });
     }
   }
 

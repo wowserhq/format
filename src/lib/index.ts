@@ -9,7 +9,6 @@ export * from './map/Map.js';
 export * from './map/MapArea.js';
 export * from './map/MapChunk.js';
 export * from './map/MapLayer.js';
-export * from './map/MapDoodadDef.js';
 export * from './map/MapObjDef.js';
 
 export * from './mapobj/MapObj.js';
