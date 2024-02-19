@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.0](https://github.com/wowserhq/format/compare/v0.25.0...v0.26.0) (2024-02-18)
+
+
+### Features
+
+* **mapobj:** add initial format support for map objects ([a8f4377](https://github.com/wowserhq/format/commit/a8f43773897ba46726a8249123a5ebd7bbf3f207))
+
 ## [0.25.0](https://github.com/wowserhq/format/compare/v0.24.0...v0.25.0) (2024-02-10)
 
 
