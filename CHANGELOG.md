@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.1](https://github.com/wowserhq/format/compare/v0.26.0...v0.26.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* **mapobj:** expose group info type ([53dba9f](https://github.com/wowserhq/format/commit/53dba9fc0d44b9ebb38ddcf0271b6fc59730fc6c))
+
 ## [0.26.0](https://github.com/wowserhq/format/compare/v0.25.0...v0.26.0) (2024-02-18)
 
 
