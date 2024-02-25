@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.27.0](https://github.com/wowserhq/format/compare/v0.26.1...v0.27.0) (2024-02-25)
+
+
+### Features
+
+* **mapobj:** add unknown shader enum values ([78d776f](https://github.com/wowserhq/format/commit/78d776f19d3c9d552bb48112dbe12c056bdb1655))
+* **mapobj:** load group colors ([b2957fa](https://github.com/wowserhq/format/commit/b2957fadd26c5616dc66b5ed450985ad9f340321))
+
 ## [0.26.1](https://github.com/wowserhq/format/compare/v0.26.0...v0.26.1) (2024-02-19)
 
 
