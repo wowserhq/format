@@ -12,10 +12,15 @@ class MapObjGroup {
   #indices: Uint16Array;
   #normals: Float32Array;
   #textureCoords: Float32Array;
+  #colors: Uint8Array;
   #vertices: Float32Array;
 
   get batches() {
     return this.#batches;
+  }
+
+  get colors() {
+    return this.#colors;
   }
 
   get indices() {
@@ -75,6 +80,11 @@ class MapObjGroup {
     const textureCoordsChunk = groupData.get('MOTV');
     if (textureCoordsChunk) {
       this.#textureCoords = textureCoordsChunk;
+    }
+
+    const colorsChunk = groupData.get('MOCV');
+    if (colorsChunk) {
+      this.#colors = colorsChunk;
     }
 
     const verticesChunk = groupData.get('MOVT');
