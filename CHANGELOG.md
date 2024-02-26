@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.28.0](https://github.com/wowserhq/format/compare/v0.27.0...v0.28.0) (2024-02-26)
+
+
+### Features
+
+* **mapobj:** add vertex color fix logic to group loading ([7d75e19](https://github.com/wowserhq/format/commit/7d75e191453ed5cbeec9193776330b7263ef52ae))
+
+
+### Bug Fixes
+
+* **mapobj:** correct property names for first and last vertex in batches ([6d7730e](https://github.com/wowserhq/format/commit/6d7730ec24676ce5ecc89a74317d0a9f6c622d06))
+
 ## [0.27.0](https://github.com/wowserhq/format/compare/v0.26.1...v0.27.0) (2024-02-25)
 
 
