@@ -5,8 +5,8 @@ type MapObjBatch = {
   boundingBox: number[];
   indexStart: number;
   indexCount: number;
-  vertexStart: number;
-  vertexCount: number;
+  firstVertex: number;
+  lastVertex: number;
   materialIndex: number;
 };
 

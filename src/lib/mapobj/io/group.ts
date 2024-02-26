@@ -6,8 +6,8 @@ const mapObjBatch = io.struct({
   boundingBox: io.array(io.int16le, { size: 6 }),
   indexStart: io.uint32le,
   indexCount: io.uint16le,
-  vertexStart: io.uint16le,
-  vertexCount: io.uint16le,
+  firstVertex: io.uint16le,
+  lastVertex: io.uint16le,
   flags: io.uint8,
   materialIndex: io.uint8,
 });
