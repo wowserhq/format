@@ -1,11 +1,12 @@
 import { IoMode, IoSource, openStream } from '@wowserhq/io';
 import { indexChunks } from '../util.js';
 import * as groupIo from './io/group.js';
-import { MAP_OBJ_GROUP_FLAG } from './const.js';
+import { MAP_OBJ_FLAG, MAP_OBJ_GROUP_FLAG } from './const.js';
 import { MapObjBatch } from './types.js';
 
 class MapObjGroup {
   #version = 17;
+  #objFlags = 0x0;
 
   #batches: MapObjBatch[] = [];
 
@@ -14,6 +15,10 @@ class MapObjGroup {
   #textureCoords: Float32Array;
   #colors: Uint8Array;
   #vertices: Float32Array;
+
+  constructor(objFlags: number) {
+    this.#objFlags = objFlags;
+  }
 
   get batches() {
     return this.#batches;
@@ -85,6 +90,10 @@ class MapObjGroup {
     const colorsChunk = groupData.get('MOCV');
     if (colorsChunk) {
       this.#colors = colorsChunk;
+
+      if (!(this.#objFlags & MAP_OBJ_FLAG.FLAG_CVERTS_FIXED)) {
+        this.#fixColors(groupHeader);
+      }
     }
 
     const verticesChunk = groupData.get('MOVT');
@@ -93,6 +102,52 @@ class MapObjGroup {
     }
 
     return this;
+  }
+
+  #fixColors(header: any) {
+    const intBatchStart =
+      header.transBatchCount > 0 ? this.#batches[header.transBatchCount].lastVertex + 1 : 0;
+
+    for (let i = 0; i < this.#colors.length / 4; i++) {
+      const colorOfs = i * 4;
+
+      if (i >= intBatchStart) {
+        // Int / ext batches
+
+        let r = this.#colors[colorOfs + 2];
+        let g = this.#colors[colorOfs + 1];
+        let b = this.#colors[colorOfs + 0];
+        let a = this.#colors[colorOfs + 3];
+
+        r += ((r * a) / 64) | 0;
+        g += ((g * a) / 64) | 0;
+        b += ((b * a) / 64) | 0;
+
+        r = Math.min((r / 2) | 0, 255);
+        g = Math.min((g / 2) | 0, 255);
+        b = Math.min((b / 2) | 0, 255);
+        a = 255;
+
+        this.#colors[colorOfs + 2] = r;
+        this.#colors[colorOfs + 1] = g;
+        this.#colors[colorOfs + 0] = b;
+        this.#colors[colorOfs + 3] = a;
+      } else {
+        // Trans batches
+
+        let r = this.#colors[colorOfs + 2];
+        let g = this.#colors[colorOfs + 1];
+        let b = this.#colors[colorOfs + 0];
+
+        r = (r / 2) | 0;
+        g = (g / 2) | 0;
+        b = (b / 2) | 0;
+
+        this.#colors[colorOfs + 2] = r;
+        this.#colors[colorOfs + 1] = g;
+        this.#colors[colorOfs + 0] = b;
+      }
+    }
   }
 }
 
